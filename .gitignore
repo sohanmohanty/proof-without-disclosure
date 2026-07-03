@@ -21,3 +21,9 @@ Thumbs.db
 # Local experiment output (proof files users generate while testing)
 scratch/
 *.local.json
+
+# Local generated proof artifacts
+commitment.json
+reveal.json
+proof.json
+toykey.json
