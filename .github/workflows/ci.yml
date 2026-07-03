@@ -16,7 +16,8 @@ jobs:
       - name: Install
         run: pip install -e "./prooflab[dev]"
       - name: Test (includes shared interop vectors)
-        run: python -m pytest prooflab/tests -q
+        working-directory: prooflab
+        run: python -m pytest tests -q
 
   website:
     name: website (TypeScript)
