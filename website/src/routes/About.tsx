@@ -10,6 +10,9 @@ export default function About() {
     >
       <Section title="What this is">
         <p>
+          Built by <strong>Sohan Mohanty</strong>.
+        </p>
+        <p>
           Proof Without Disclosure is an interactive cryptography lab and local
           toolkit exploring one question: <em>what can one person prove to
           another without revealing more than necessary?</em> Six modules walk

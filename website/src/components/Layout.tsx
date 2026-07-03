@@ -61,6 +61,7 @@ export default function Layout() {
             Everything on this site runs in your browser — no server, no
             uploads, no analytics. Companion CLI: <code>prooflab</code>.
           </p>
+          <p>Copyright (c) 2026 Sohan Mohanty.</p>
         </div>
       </footer>
     </>

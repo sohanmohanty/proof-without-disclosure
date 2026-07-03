@@ -9,6 +9,7 @@ description = "Educational cryptography toolkit: hashes, commitments, Merkle pro
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
+authors = [{ name = "Sohan Mohanty" }]
 keywords = ["cryptography", "education", "merkle", "zero-knowledge", "commitments"]
 classifiers = [
     "Development Status :: 4 - Beta",
