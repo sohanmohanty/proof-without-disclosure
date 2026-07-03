@@ -4,6 +4,8 @@
 
 Created by **Sohan Mohanty**.
 
+**Live site:** <https://proof-without-disclosure.vercel.app/>
+
 > What can mathematics let us prove without revealing more than necessary?
 
 Cryptography is usually introduced as the art of hiding messages. This project is about the other half of the field — **proving things**: that a file hasn't changed, that a promise was made before the outcome was known, that an item belongs to a set nobody gets to see, that a message really came from you, and finally that you know a secret *without revealing it*.
