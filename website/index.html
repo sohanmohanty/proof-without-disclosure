@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Proof Without Disclosure — an interactive cryptography lab about trust, privacy, and verification. Hash functions, commitments, Merkle proofs, signatures, and zero-knowledge, all running in your browser."
+    />
+    <title>Proof Without Disclosure</title>
+    <script>
+      // apply saved theme before first paint to avoid a flash
+      const saved = localStorage.getItem("pwd-theme");
+      if (saved === "dark" || (!saved && matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.dataset.theme = "dark";
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prooflab"
+version = "0.1.0"
+description = "Educational cryptography toolkit: hashes, commitments, Merkle proofs, Schnorr proofs, and signatures — proof without disclosure."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["cryptography", "education", "merkle", "zero-knowledge", "commitments"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Education",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Education",
+]
+# Core commands (hash, commit, merkle, schnorr, zk-color) use only the
+# standard library. Real signatures require the vetted `cryptography` package.
+dependencies = []
+
+[project.optional-dependencies]
+signatures = ["cryptography>=42"]
+dev = ["pytest>=8", "cryptography>=42"]
+
+[project.scripts]
+prooflab = "prooflab.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["prooflab*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

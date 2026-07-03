@@ -1,0 +1,6 @@
+I, the sender, approve transferring exactly one (1) genuine compliment
+to the recipient of this message. This offer expires never.
+
+(Generate a key with `prooflab keygen --dir keys`, sign me with
+`prooflab sign examples/sample_message.txt --key keys/private.pem`, then
+change one character and watch verification fail.)

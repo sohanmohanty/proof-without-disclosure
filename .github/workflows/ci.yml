@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python:
+    name: prooflab (Python)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -e "./prooflab[dev]"
+      - name: Test (includes shared interop vectors)
+        run: python -m pytest prooflab/tests -q
+
+  website:
+    name: website (TypeScript)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+      - name: Install
+        run: npm ci --prefix website
+      - name: Test (includes shared interop vectors)
+        run: npm test --prefix website
+      - name: Type-check and build
+        run: npm run build --prefix website
