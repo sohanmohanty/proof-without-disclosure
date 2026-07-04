@@ -9,9 +9,9 @@
     />
     <title>Proof Without Disclosure</title>
     <script>
-      // apply saved theme before first paint to avoid a flash
-      const saved = localStorage.getItem("pwd-theme");
-      if (saved === "dark" || (!saved && matchMedia("(prefers-color-scheme: dark)").matches)) {
+      // apply the theme before first paint to avoid a flash:
+      // dark by default, unless the visitor explicitly chose light
+      if (localStorage.getItem("pwd-theme") !== "light") {
         document.documentElement.dataset.theme = "dark";
       }
     </script>

@@ -14,7 +14,7 @@ Cryptography is usually introduced as the art of hiding messages. This project i
 
 | Part | What it is | Where |
 |---|---|---|
-| **Website** | Interactive lab: six modules with live demos, "try to cheat" modes, and visual proofs. React + TypeScript, all cryptography client-side — no server, no uploads. | [`website/`](website/) |
+| **Website** | Interactive lab: six modules with live demos, "try to cheat" modes, and visual proofs — opening with a scroll-driven 3D tour whose scenes are computed from real crypto output. React + TypeScript + three.js, all cryptography client-side — no server, no uploads. | [`website/`](website/) |
 | **CLI** | `prooflab`, a Python toolkit that generates and verifies the same proofs locally. Core commands use only the standard library. | [`prooflab/`](prooflab/) |
 | **Spec** | Byte-level format rules both implementations follow. | [`docs/format-spec.md`](docs/format-spec.md) |
 | **Shared vectors** | Test vectors generated once and verified by *both* test suites — the pin that keeps two independent implementations interoperable. | [`vectors/test-vectors.json`](vectors/test-vectors.json) |

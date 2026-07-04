@@ -1,6 +1,6 @@
 import { HashRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import Home from "./routes/Home";
+import Landing from "./routes/Landing";
 import HashLab from "./routes/HashLab";
 import CommitmentLab from "./routes/CommitmentLab";
 import MerkleLab from "./routes/MerkleLab";
@@ -15,7 +15,7 @@ export default function App() {
     <HashRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route index element={<Landing />} />
           <Route path="hash" element={<HashLab />} />
           <Route path="commitments" element={<CommitmentLab />} />
           <Route path="merkle" element={<MerkleLab />} />

@@ -1,6 +1,7 @@
 import CodeBlock from "../components/CodeBlock";
 import Dropzone from "../components/Dropzone";
 import { LabPage, Section } from "../components/LabPage";
+import { REPO_URL } from "../site";
 
 const COMMANDS: [string, string][] = [
   ["prooflab hash notes.pdf --out notes.hash.json", "fingerprint a file; verify later with --verify"],
@@ -35,8 +36,8 @@ export default function Toolkit() {
       <Section title="Install">
         <CodeBlock
           code={`
-# from the repository root
-cd prooflab
+git clone ${REPO_URL}.git
+cd proof-without-disclosure/prooflab
 pip install -e .              # core: zero dependencies (stdlib only)
 pip install -e ".[signatures]"  # + ECDSA signatures (vetted 'cryptography' lib)
 
@@ -45,7 +46,11 @@ prooflab --help`}
         <p className="footnote">
           Python 3.10+. The core commands (hash, commit, merkle, schnorr,
           zk-color) use only the standard library — every line of protocol
-          logic is in the repo to read.
+          logic is{" "}
+          <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
+            in the repo to read
+          </a>
+          .
         </p>
       </Section>
 
