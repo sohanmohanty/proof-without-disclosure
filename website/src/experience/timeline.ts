@@ -3,12 +3,12 @@
  * The journey is a stack of full-width sections, one per chapter, scrolling
  * over a sticky full-viewport canvas. All choreography is driven by a single
  * number: the scroll offset into the journey measured in vh units. This
- * module is pure math — no DOM, no three.js — so it is unit-testable.
+ * module is pure math (no DOM, no three.js), so it is unit-testable.
  *
  * A chapter's scene is "live" from shortly after its section top enters the
  * viewport (start − 75vh) until shortly before its section scrolls away
  * (start + height − 25vh). Adjacent ranges therefore overlap by exactly
- * 50vh — a brief handoff where the outgoing scene's exit fade crosses the
+ * 50vh: a brief handoff where the outgoing scene's exit fade crosses the
  * incoming scene's entrance, so one scene is always clearly dominant.
  */
 
@@ -68,13 +68,13 @@ export function chapterRange(id: ChapterId): ChapterRange {
 }
 
 /** Local progress of a chapter at a given journey offset. 0 at enter, 1 at
- * exit, *unclamped* outside — scenes use the margin to hide themselves. */
+ * exit, *unclamped* outside; scenes use the margin to hide themselves. */
 export function localProgress(offsetVh: number, id: ChapterId): number {
   const { enterVh, exitVh } = chapterRange(id);
   return (offsetVh - enterVh) / (exitVh - enterVh);
 }
 
-/** Index of the chapter whose section currently dominates the viewport —
+/** Index of the chapter whose section currently dominates the viewport,
  * used for progress dots and for mounting only active ± 1 scenes. */
 export function activeChapterIndex(offsetVh: number): number {
   let active = 0;

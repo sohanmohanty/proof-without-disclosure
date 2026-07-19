@@ -1,11 +1,11 @@
 """Hash-based commitments: commit = SHA-256(salt_hex + ":" + secret).
 
 Properties (both computational, both inherited from SHA-256):
-  hiding  — the commitment reveals nothing useful about the secret, because
-            the 16-byte random salt blocks brute-force guessing of likely
-            secrets;
-  binding — opening the commitment to a different secret would require a
-            SHA-256 collision.
+  hiding:  the commitment reveals nothing useful about the secret, because
+           the 16-byte random salt blocks brute-force guessing of likely
+           secrets;
+  binding: opening the commitment to a different secret would require a
+           SHA-256 collision.
 
 The exact byte encoding matters for interoperability and is specified in
 docs/format-spec.md: UTF-8 of the lowercase hex salt, a ":" separator,
@@ -24,8 +24,8 @@ SALT_BYTES = 16
 
 @dataclass(frozen=True)
 class Commitment:
-    commitment: str  # hex digest — safe to publish
-    salt: str        # hex — keep private until reveal
+    commitment: str  # hex digest, safe to publish
+    salt: str        # hex, keep private until reveal
     secret: str      # keep private until reveal
 
 

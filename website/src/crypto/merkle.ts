@@ -2,8 +2,8 @@
  *
  * Design choices (details in docs/format-spec.md and the MerkleLab page):
  *  - RFC 6962 domain separation: leaf = H(0x00 || item),
- *    node = H(0x01 || left || right) — blocks node-as-leaf proof forgery;
- *  - odd nodes are promoted, not duplicated — avoids the ambiguity behind
+ *    node = H(0x01 || left || right), which blocks node-as-leaf proof forgery;
+ *  - odd nodes are promoted, not duplicated, avoiding the ambiguity behind
  *    Bitcoin's CVE-2012-2459.
  */
 

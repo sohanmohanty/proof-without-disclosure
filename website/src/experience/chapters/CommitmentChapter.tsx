@@ -1,12 +1,12 @@
-/** Chapter 2 — commitments: seal a secret now, open it later.
+/** Chapter 2: commitments. Seal a secret now, open it later.
  *
  * The secret is a torus-knot glowing inside a glass sphere. To commit, the
- * shell frosts opaque and a stamp ring screws tight around its equator —
+ * shell frosts opaque and a stamp ring screws tight around its equator;
  * tick heights are the nibbles of a REAL commitment, SHA-256(salt:secret)
  * from crypto/commitments.ts. Published stamp, hidden secret: while sealed
  * the knot is genuinely invisible (hiding), and the engraved ring cannot be
  * re-cut to fit a different secret (binding). On reveal the shell clears and
- * verifyReveal() recomputes the hash — the knot and ticks flash green only
+ * verifyReveal() recomputes the hash; the knot and ticks flash green only
  * because the real check passed. Hide → bind → open → check.
  *
  * Follows the exemplar's discipline: chapterFrame() gate, everything a pure
@@ -26,14 +26,14 @@ const SECRET = "attack at dawn";
 const RING_R = 2.15;
 const RING_LOOSE_R = 3.0;
 
-// module-scope temps — useFrame must not allocate
+// module-scope temps: useFrame must not allocate
 const tmpObject = new THREE.Object3D();
 const tmpColor = new THREE.Color();
 const tickBase = new THREE.Color();
 
 interface Proof {
-  hex: string; // the real commitment digest — engraved on the stamp ring
-  ok: boolean; // real verifyReveal() result — gates the "verified" flash
+  hex: string; // the real commitment digest, engraved on the stamp ring
+  ok: boolean; // real verifyReveal() result; gates the "verified" flash
 }
 
 export default function CommitmentChapter() {
@@ -70,7 +70,7 @@ export default function CommitmentChapter() {
   }, []);
 
   /** Tick bar heights from the commitment's hex nibbles (uniform until the
-   * digest arrives — the crypto resolves within a frame or two). */
+   * digest arrives; the crypto resolves within a frame or two). */
   const tickAmp = useMemo(() => {
     const amps = new Float32Array(tickCount);
     for (let i = 0; i < tickCount; i++) {

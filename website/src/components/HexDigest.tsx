@@ -1,5 +1,5 @@
 /** Monospace digest display; when `diffAgainst` is given, characters that
- * differ are highlighted — the avalanche effect made visible. */
+ * differ are highlighted: the avalanche effect made visible. */
 export default function HexDigest(props: {
   value: string;
   label?: string;

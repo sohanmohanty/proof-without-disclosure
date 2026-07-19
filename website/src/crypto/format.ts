@@ -76,7 +76,7 @@ export async function verifyDoc(
         details: ok
           ? [
               `"${item}" is in the set committed to by root ${root.slice(0, 16)}…`,
-              `Proof size: ${path.length} hashes — the whole set was never disclosed.`,
+              `Proof size: ${path.length} hashes; the whole set was never disclosed.`,
               "Check the root against the copy you trust: a proof is only as good as its root.",
             ]
           : ["The item is not in the set, or the proof or root was altered."],
@@ -99,7 +99,7 @@ export async function verifyDoc(
         title: ok ? "Schnorr proof valid" : "Schnorr proof INVALID",
         details: ok
           ? [
-              "The prover knows the private key behind this public key — the key itself was never revealed.",
+              "The prover knows the private key behind this public key; the key itself was never revealed.",
               proof.message
                 ? `Bound to message: "${proof.message}"`
                 : "Not bound to any message.",

@@ -1,5 +1,5 @@
 """Re-verify every shared test vector. The TypeScript suite runs the same
-file — this is what keeps two independent implementations interoperable."""
+file; this is what keeps two independent implementations interoperable."""
 
 import json
 from pathlib import Path
@@ -14,7 +14,7 @@ VECTORS_PATH = Path(__file__).resolve().parents[2] / "vectors" / "test-vectors.j
 @pytest.fixture(scope="module")
 def vectors():
     assert VECTORS_PATH.exists(), (
-        "shared vectors missing — run: python scripts/generate_vectors.py"
+        "shared vectors missing; run: python scripts/generate_vectors.py"
     )
     return json.loads(VECTORS_PATH.read_text(encoding="utf-8"))
 

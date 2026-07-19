@@ -1,6 +1,6 @@
 """SHA-256 hashing of strings and files.
 
-SHA-256 comes from Python's standard library (hashlib) — we never implement
+SHA-256 comes from Python's standard library (hashlib); we never implement
 the primitive itself, only the ways it is used.
 """
 

@@ -11,7 +11,7 @@ export default function HashLab() {
   const [input, setInput] = useState("hello");
   const [digest, setDigest] = useState("");
   const [previous, setPrevious] = useState<{ input: string; digest: string } | null>(null);
-  // last committed (input, digest) pair — kept in a ref so the effect stays pure
+  // last committed (input, digest) pair, kept in a ref so the effect stays pure
   const last = useRef<{ input: string; digest: string } | null>(null);
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function HashLab() {
       question="How can data have a fingerprint?"
       intro={
         <p>
-          A cryptographic hash turns any input — a word, a file, a hard drive —
+          A cryptographic hash turns any input (a word, a file, a hard drive)
           into a fixed-size fingerprint. Same input, same fingerprint, every
           time. But change one character and the fingerprint is unrecognizable.
           Everything else in this lab is built out of this one primitive.
@@ -120,7 +120,7 @@ export default function HashLab() {
         <p>
           The same digest works for files: two parties can compare a 32-byte
           fingerprint instead of a 4&nbsp;GB download.{" "}
-          <strong>The file never leaves your machine</strong> — hashing happens
+          <strong>The file never leaves your machine</strong>: hashing happens
           in this tab.
         </p>
         <div className="controls">
@@ -129,14 +129,14 @@ export default function HashLab() {
             aria-label="File to hash"
             onChange={async (e) => {
               const file = e.target.files?.[0];
-              // clear so re-selecting the same file re-fires onChange —
+              // clear so re-selecting the same file re-fires onChange;
               // otherwise an edited file would keep showing its stale digest
               e.target.value = "";
               if (!file) return;
               if (file.size > MAX_FILE_BYTES) {
                 setFileDigest(null);
                 setFileError(
-                  `${file.name} is ${(file.size / 1e6).toFixed(0)} MB — this demo reads files whole, so it caps at 500 MB. (The CLI streams in chunks and has no limit: prooflab hash yourfile)`,
+                  `${file.name} is ${(file.size / 1e6).toFixed(0)} MB; this demo reads files whole, so it caps at 500 MB. (The CLI streams in chunks and has no limit: prooflab hash yourfile)`,
                 );
                 return;
               }
@@ -158,7 +158,7 @@ export default function HashLab() {
       <Section title="Try to cheat: hunt for a collision">
         <p>
           A hash is only useful if nobody can find two inputs with the same
-          fingerprint. Full SHA-256 has 2<sup>256</sup> possible outputs — but
+          fingerprint. Full SHA-256 has 2<sup>256</sup> possible outputs. But
           what if we only kept the first few bits? Search for a collision on a
           truncated hash and watch the <em>birthday paradox</em> at work.
         </p>
@@ -197,7 +197,7 @@ export default function HashLab() {
               </li>
               <li>
                 Notice how close {collision.attempts.toLocaleString()} is to the
-                √N birthday estimate — not to N itself.
+                √N birthday estimate, not to N itself.
               </li>
             </ul>
           </div>
@@ -205,7 +205,7 @@ export default function HashLab() {
         <p>
           Scale that intuition up: at 256 bits the birthday bound is about
           2<sup>128</sup> ≈ 3.4 × 10<sup>38</sup> attempts. Hashing a trillion
-          inputs per second, that is ~10<sup>19</sup> years — the attack that
+          inputs per second, that is ~10<sup>19</sup> years; the attack that
           works instantly at 20 bits simply dies at 256.
         </p>
         <MathAside>
@@ -214,7 +214,7 @@ export default function HashLab() {
             probability that all k digests are distinct is{" "}
             <code>∏(1 − i/N) ≈ e^(−k²/2N)</code>. That hits 50% at{" "}
             <code>k ≈ 1.1774·√N</code>, and the expected number of draws until
-            a repeat is <code>≈ 1.2533·√N</code> — the constant used above.
+            a repeat is <code>≈ 1.2533·√N</code>, the constant used above.
             This is why a hash with n output bits offers only n/2 bits of
             collision resistance, and why 128-bit hashes (like MD5) are
             considered broken for signatures.
@@ -222,7 +222,7 @@ export default function HashLab() {
         </MathAside>
       </Section>
 
-      <Section title="What hashing buys you — and what it doesn't">
+      <Section title="What hashing buys you, and what it doesn't">
         <Guarantees
           does={[
             "Deterministic fingerprints: same data, same digest",
@@ -231,7 +231,7 @@ export default function HashLab() {
             "Collision resistance at full output length",
           ]}
           doesnt={[
-            "Hashing is NOT encryption — nothing is meant to be decrypted",
+            "Hashing is NOT encryption: nothing is meant to be decrypted",
             "Doesn't hide guessable inputs: hash every 4-digit PIN and compare",
             "Doesn't prove who made the data or when",
             "Truncated hashes lose security quadratically fast",

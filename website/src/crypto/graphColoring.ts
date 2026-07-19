@@ -1,6 +1,6 @@
 /** Zero-knowledge graph 3-coloring, structured so the UI can drive each
  * protocol move separately. Reuses the commitment scheme from
- * commitments.ts — the module-2 primitive powering the module-6 protocol. */
+ * commitments.ts: the module-2 primitive powering the module-6 protocol. */
 
 import { commit, verifyReveal, type Commitment } from "./commitments";
 
@@ -39,11 +39,11 @@ export const PETERSEN: Graph = {
 };
 
 /** Same graph, but the witness has exactly one bad edge: (3, 4). A cheater
- * this good is caught with probability only 1/15 per round — soundness has
+ * this good is caught with probability only 1/15 per round; soundness has
  * to be earned by repetition. */
 export const PETERSEN_CHEAT_COLORING = [1, 2, 1, 2, 2, 2, 3, 3, 1, 1];
 
-/** K4: every pair of its 4 nodes is connected — it needs 4 colors, so NO
+/** K4: every pair of its 4 nodes is connected; it needs 4 colors, so NO
  * valid 3-coloring exists. The best possible fake has one bad edge. */
 export const K4: Graph = {
   name: "k4",
@@ -63,7 +63,7 @@ export interface RoundState {
   commitments: Commitment[];   // one per node; only commitment field is shown
 }
 
-/** Uniform integer in [0, n) via rejection sampling — same discipline as
+/** Uniform integer in [0, n) via rejection sampling, the same discipline as
  * schnorr.ts's randBelow. A plain `uint32 % n` would carry (negligible but
  * real) modulo bias. */
 function randInt(n: number): number {
@@ -75,7 +75,7 @@ function randInt(n: number): number {
 }
 
 /** Uniform Fisher-Yates shuffle. (The zero-knowledge argument needs the
- * label permutation to be uniform — the popular `sort(() => Math.random()
+ * label permutation to be uniform; the popular `sort(() => Math.random()
  * - 0.5)` trick is biased, so it has no place here.) */
 function shuffledLabels(): number[] {
   const labels = [1, 2, 3];

@@ -90,13 +90,13 @@ export default function MerkleLab() {
     <LabPage
       kicker="Module 03"
       title="Merkle Trees"
-      question="How can you prove one item belongs to a set — without showing the set?"
+      question="How can you prove one item belongs to a set, without showing the set?"
       intro={
         <p>
           Hash every item, then hash the hashes in pairs, and again, until one
           hash remains: the <strong>root</strong>. That single value now vouches
           for the entire list. To prove one item belongs, you hand over just
-          the sibling hashes along its path — for a million items, that is 20
+          the sibling hashes along its path: for a million items, that is 20
           hashes, not a million.
         </p>
       }
@@ -121,7 +121,7 @@ export default function MerkleLab() {
             <div className="stat-row">
               <div className="stat">Items <b>{items.length}</b></div>
               <div className="stat">
-                Proof size <b>{proof ? proof.length : "—"} hashes</b>
+                Proof size <b>{proof ? proof.length : "–"} hashes</b>
               </div>
               <div className="stat">
                 For 1,000,000 items <b>20 hashes</b>
@@ -129,7 +129,7 @@ export default function MerkleLab() {
             </div>
             {tree && (
               <>
-                <div className="hex-label">merkle root — publish just this</div>
+                <div className="hex-label">merkle root (publish just this)</div>
                 <div className="hex">{rootOf(tree)}</div>
               </>
             )}
@@ -154,7 +154,7 @@ export default function MerkleLab() {
             ) : tree ? (
               <>
                 <p className="notice">
-                  {items.length} items is too many to draw — which is exactly
+                  {items.length} items is too many to draw, which is exactly
                   why Merkle proofs exist. Pick an item; its proof is still
                   just {Math.ceil(Math.log2(items.length))} hashes.
                 </p>
@@ -167,7 +167,7 @@ export default function MerkleLab() {
                     setVerifyState(null);
                   }}
                 >
-                  <option value="">— choose an item —</option>
+                  <option value="">choose an item…</option>
                   {items.map((item, i) => (
                     <option key={i} value={i}>
                       {item.length > 48 ? item.slice(0, 46) + "…" : item}
@@ -214,8 +214,8 @@ export default function MerkleLab() {
                   <li>
                     Recomputed leaf → root using {verifyState.steps} sibling
                     hashes{verifyState.ok
-                      ? " — and reached the published root exactly."
-                      : " — and reached a different root. Something changed."}
+                      ? ", and reached the published root exactly."
+                      : ", and reached a different root. Something changed."}
                   </li>
                 </ul>
               </div>
@@ -227,7 +227,7 @@ export default function MerkleLab() {
       <Section title="Try to cheat: edit the list after publishing the root">
         <p>
           The whole point of a Merkle root is that it freezes the set. Publish
-          the root, then let Mallory tamper with an item — every proof against
+          the root, then let Mallory tamper with an item: every proof against
           the <em>old</em> root now fails.
         </p>
         <div className="controls">
@@ -260,7 +260,7 @@ export default function MerkleLab() {
               ))}
             </div>
             <p className="footnote">
-              Select the tampered leaf and press Verify — the proof is checked
+              Select the tampered leaf and press Verify: the proof is checked
               against the frozen root and fails.
             </p>
           </>
@@ -269,8 +269,8 @@ export default function MerkleLab() {
 
       <Section title="Verify a proof from the CLI">
         <p>
-          Generate a proof on your machine —{" "}
-          <code>prooflab merkle prove students.txt --item student_42</code> —
+          Generate a proof on your machine with{" "}
+          <code>prooflab merkle prove students.txt --item student_42</code>,
           then drop <code>proof.json</code> here. The browser recomputes the
           path without ever seeing the rest of your list.
         </p>
@@ -298,7 +298,7 @@ node  = SHA256(0x01 || left || right) # live in different namespaces
 [a b c]  ->  [H(a,b) c]  ->  root     # c is carried up unchanged
 
 # Bitcoin instead duplicates the last hash: [a b c c]. That makes two
-# DIFFERENT lists share a root — the ambiguity behind CVE-2012-2459,
+# DIFFERENT lists share a root: the ambiguity behind CVE-2012-2459,
 # which could crash nodes into rejecting valid blocks.`}
         />
         <Guarantees
@@ -323,7 +323,7 @@ node  = SHA256(0x01 || left || right) # live in different namespaces
         <MathAside>
           <p>
             Verification does <code>⌈log₂ n⌉</code> hashes versus <code>n</code>{" "}
-            for rechecking the list — for a billion items, 30 instead of
+            for rechecking the list: for a billion items, 30 instead of
             10⁹. Forging a proof means finding some sibling path whose folded
             hash equals the root: a structured second-preimage attack on
             SHA-256, expected cost ~2²⁵⁶ (domain separation is what stops the

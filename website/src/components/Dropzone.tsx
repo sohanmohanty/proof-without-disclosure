@@ -22,7 +22,7 @@ export default function Dropzone(props: { hint?: string }) {
       try {
         docs.push(parseDoc(new TextDecoder().decode(bytes)));
       } catch {
-        // not a prooflab JSON — treat it as the message file for a signature
+        // not a prooflab JSON; treat it as the message file for a signature
         messageBytes = bytes;
         messageName = file.name;
       }
@@ -97,7 +97,7 @@ export default function Dropzone(props: { hint?: string }) {
         </p>
         <p className="footnote">
           {props.hint ??
-            "proof.json, commitment.json + reveal.json, schnorr_proof.json, or signature.json plus the signed file. Verification happens in your browser — nothing is uploaded."}
+            "proof.json, commitment.json + reveal.json, schnorr_proof.json, or signature.json plus the signed file. Verification happens in your browser; nothing is uploaded."}
         </p>
       </div>
       {outcomes.map((o, i) => (

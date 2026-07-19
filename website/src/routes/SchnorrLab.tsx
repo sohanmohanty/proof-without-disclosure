@@ -99,7 +99,7 @@ export default function SchnorrLab() {
       const { s, R } = schnorr.forgeCommitment(group, key.y, guessed);
       const actual = schnorr.randomChallenge(group);
       if (schnorr.check(group, key.y, R, actual, s)) wins++;
-      // 2048-bit modPows are heavy — yield so the page stays responsive
+      // 2048-bit modPows are heavy; yield so the page stays responsive
       if (!toy && i % 4 === 3) await nextTask();
     }
     setCheatStats({ wins, trials });
@@ -124,7 +124,7 @@ export default function SchnorrLab() {
       const log10years = log10q - Math.log10(rate * 31_557_600);
       setCrack(
         `Tried 150,000 exponents in ${ms.toFixed(0)} ms (~${Math.round(rate).toLocaleString()}/s). ` +
-        `At this rate, sweeping q ≈ 2^2046 would take ~10^${Math.round(log10years)} years — ` +
+        `At this rate, sweeping q ≈ 2^2046 would take ~10^${Math.round(log10years)} years; ` +
         `the universe is ~1.4×10^10 years old. This is what "computationally hard" means.`,
       );
     }
@@ -141,16 +141,16 @@ export default function SchnorrLab() {
     <LabPage
       kicker="Module 06"
       title="The Schnorr Protocol"
-      question="Can zero-knowledge be built from real algebra — and turned into a signature?"
+      question="Can zero-knowledge be built from real algebra, and turned into a signature?"
       intro={
         <p>
           Module 05 played zero-knowledge as a game. This is the real thing:
           the prover holds a secret exponent <code>x</code> and proves knowledge
-          of it — the exact protocol family behind Bitcoin's Taproot signatures.
+          of it: the exact protocol family behind Bitcoin's Taproot signatures.
           The arena is a multiplicative group: fix a prime <code>p</code> and
           generator <code>g</code>; the public key is{" "}
           <code>y = g<sup>x</sup> mod p</code>. Computing y from x is instant.
-          Computing x from y is the <strong>discrete logarithm problem</strong> —
+          Computing x from y is the <strong>discrete logarithm problem</strong>,
           and in a big enough group, nobody on earth can do it.
         </p>
       }
@@ -182,7 +182,7 @@ export default function SchnorrLab() {
               powers of 4 cycle through exactly q = 11 values:
             </p>
             <CodeBlock
-              label="the whole subgroup — the clock this protocol runs on"
+              label="the whole subgroup: the clock this protocol runs on"
               code={
                 "x:        " + subgroup.map((_, i) => String(i).padStart(3)).join("") +
                 "\n4^x mod 23:" + subgroup.map((v) => String(v).padStart(3)).join("")
@@ -190,7 +190,7 @@ export default function SchnorrLab() {
             />
             <p className="footnote">
               Discrete log here = reading this table backwards. That is the
-              entire attack — which is why real groups make the table
+              entire attack, which is why real groups make the table
               2<sup>2046</sup> entries long.
             </p>
           </>
@@ -198,12 +198,12 @@ export default function SchnorrLab() {
         {key && (
           <div className="split">
             <div>
-              <div className="hex-label">public key y = g^x mod p — share this</div>
+              <div className="hex-label">public key y = g^x mod p (share this)</div>
               <div className="hex">{toy ? key.y.toString() : schnorr.toHex(group, key.y)}</div>
             </div>
             <div>
               <div className="hex-label">
-                private key x —{" "}
+                private key x:{" "}
                 <button
                   className="ghost"
                   style={{ padding: "0 0.4rem", fontSize: "0.75rem" }}
@@ -222,8 +222,8 @@ export default function SchnorrLab() {
 
       <Section title="The three-move dance, step by step">
         <p>
-          Prove you know x without revealing it. Each move is one button —
-          watch what each party actually sends.
+          Prove you know x without revealing it. Each move is one button.
+          Watch what each party actually sends.
         </p>
         <div className="controls">
           <button className="primary" onClick={stepCommit} disabled={!key || state.step === "committed" || state.step === "challenged"}>
@@ -258,7 +258,7 @@ export default function SchnorrLab() {
             <strong>{state.ok ? "✓ Verifier convinced" : "✗ Check failed"}</strong>
             <ul>
               <li>
-                g^s = g^(r+c·x) = g^r · (g^x)^c = R · y^c — the algebra only
+                g^s = g^(r+c·x) = g^r · (g^x)^c = R · y^c; the algebra only
                 closes if the prover used the real x. Yet the verifier saw only
                 (R, c, s): the secret never crossed the wire.
               </li>
@@ -266,7 +266,7 @@ export default function SchnorrLab() {
           </div>
         )}
         {passes > 0 && (
-          <p className="footnote">Rounds passed: {passes}. Soundness error per round: 1/q {toy ? "= 1/11 — run the cheat below to feel how loose that is" : "≈ 2^-2046 — one round is enough"}.</p>
+          <p className="footnote">Rounds passed: {passes}. Soundness error per round: 1/q {toy ? "= 1/11; run the cheat below to feel how loose that is" : "≈ 2^-2046; one round is enough"}.</p>
         )}
       </Section>
 
@@ -275,7 +275,7 @@ export default function SchnorrLab() {
           <div>
             <h3>Prove without the key</h3>
             <p className="footnote">
-              A cheater can't answer a challenge they didn't expect — but they
+              A cheater can't answer a challenge they didn't expect, but they
               can <em>guess</em> the challenge c*, pick s at random, and
               precompute R = g^s · y^(−c*). They win only when the verifier's
               real c equals their guess: probability exactly 1/q.
@@ -330,10 +330,10 @@ export default function SchnorrLab() {
           The verifier's only job was supplying an unpredictable c. A hash
           function can do that: set{" "}
           <code>c = H(group ∥ y ∥ R ∥ message)</code>. The prover can no longer
-          guess c first — c is determined by their own commitment R. The proof
+          guess c first: c is determined by their own commitment R. The proof
           becomes a file anyone can check, no conversation needed.{" "}
           <strong>And because a message rides inside the hash, what you get is
-          a signature</strong> — this construction, on an elliptic curve, is
+          a signature</strong>. This construction, on an elliptic curve, is
           how Schnorr signatures secure Bitcoin Taproot today.
         </p>
         <div className="controls">
@@ -392,8 +392,8 @@ export default function SchnorrLab() {
           </>
         )}
         <p>
-          Verify CLI proofs here — <code>prooflab schnorr keygen && prooflab
-          schnorr prove --key schnorr_key.json --message "hi"</code> — or
+          Verify CLI proofs here (<code>prooflab schnorr keygen && prooflab
+          schnorr prove --key schnorr_key.json --message "hi"</code>), or
           download this one and run <code>prooflab schnorr verify</code>.
         </p>
         <Dropzone hint="Drop a schnorr_proof.json (from the CLI or downloaded above)" />
@@ -409,7 +409,7 @@ export default function SchnorrLab() {
           ]}
           doesnt={[
             "A reused or predictable nonce r leaks x instantly (ask Sony, PS3 2010)",
-            "The toy group is breakable by anyone — group size IS the security",
+            "The toy group is breakable by anyone: group size IS the security",
             "This demo code is educational; real wallets use audited libraries",
           ]}
           world={[
@@ -422,15 +422,15 @@ export default function SchnorrLab() {
           <p>
             <strong>Soundness (extraction).</strong> Two accepting answers for
             one R give s₁ = r + c₁x and s₂ = r + c₂x, so x = (s₁−s₂)/(c₁−c₂)
-            mod q — anyone who can answer two challenges must know x. This is
+            mod q; anyone who can answer two challenges must know x. This is
             also the nonce-reuse disaster: two signatures sharing r hand the
             world that same equation. <strong>Zero-knowledge (simulation).</strong>{" "}
             Pick c and s first, set R = g^s·y^(−c): a perfect transcript, forged
-            without x. Order of moves is everything — live, R comes first; in
+            without x. Order of moves is everything: live, R comes first; in
             Fiat–Shamir, c = H(...R...) restores that order cryptographically.{" "}
             <strong>Why g = 4?</strong> p = 2q+1 is a safe prime, and squaring
             any element lands in the subgroup of quadratic residues, which has
-            prime order q — so ord(4) = q for every safe prime p &gt; 5. Prime
+            prime order q, so ord(4) = q for every safe prime p &gt; 5. Prime
             order matters: it kills small-subgroup attacks and makes every
             non-identity element a generator.
           </p>

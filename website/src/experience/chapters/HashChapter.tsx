@@ -1,11 +1,11 @@
-/** Chapter 1 — hash functions.
+/** Chapter 1: hash functions.
  *
  * Any input in, exactly 256 bits out. A stream of bytes pours in from
  * off-screen along an S-curve and is swallowed by a compressor slab; to its
- * right stands a 16×16 lattice — one tile per digest bit. The two digests
+ * right stands a 16×16 lattice, one tile per digest bit. The two digests
  * it alternates between are real: SHA-256("hello") and SHA-256("hellp").
  * One flipped letter, and every ~3.5 s a wave sweeps the lattice left to
- * right as roughly half the bits flip — the avalanche effect, on a
+ * right as roughly half the bits flip: the avalanche effect, on a
  * metronome.
  *
  * Same discipline as HeroField, the exemplar: chapterFrame() gate at the
@@ -45,7 +45,7 @@ const TILE_SPACING = 0.26;
 const LATTICE_X = 0.8;
 const SLAB_X = -3.2;
 
-// module-scope temps — useFrame must not allocate
+// module-scope temps: useFrame must not allocate
 const tmpObject = new THREE.Object3D();
 const tmpColor = new THREE.Color();
 const streamCold = new THREE.Color();
@@ -68,7 +68,7 @@ export default function HashChapter() {
   const pulse = useRef<THREE.Mesh>(null!);
   const pulseMaterial = useRef<THREE.MeshBasicMaterial>(null!);
 
-  /** Real digest bits, one hex pair; null until Web Crypto answers — the
+  /** Real digest bits, one hex pair; null until Web Crypto answers, so the
    * lattice sits unflipped (all zeros) until then. */
   const [bits, setBits] = useState<{ a: Uint8Array; b: Uint8Array } | null>(
     null,
@@ -149,7 +149,7 @@ export default function HashChapter() {
     const t = state.clock.elapsedTime;
 
     // beats: slab + stream materialize over 0.05..0.2, lattice just behind
-    // (nothing may be visible at local <= 0.05 — the mount margin);
+    // (nothing may be visible at local <= 0.05, the mount margin);
     // 0.85..0.96 everything sinks y −3 and fades to nothing
     const enterSlab = easeOutCubic(phase(local, 0.05, 0.18));
     const enterStream = smoothstep(phase(local, 0.07, 0.21));
@@ -158,7 +158,7 @@ export default function HashChapter() {
     const fade = 1 - exit;
     group.current.position.y = -3 * exit;
 
-    // palette — copied every frame so a theme flip propagates mid-animation
+    // palette: copied every frame so a theme flip propagates mid-animation
     streamCold.copy(palette.inkFaint);
     streamWarm.copy(palette.inkSoft);
     swallowColor.copy(palette.bgInset);
@@ -294,7 +294,7 @@ export default function HashChapter() {
         </lineSegments>
       </group>
 
-      {/* (c) digest lattice — 256 tiles, one per SHA-256 bit */}
+      {/* (c) digest lattice: 256 tiles, one per SHA-256 bit */}
       <instancedMesh
         ref={lattice}
         args={[undefined, undefined, TILE_COUNT]}

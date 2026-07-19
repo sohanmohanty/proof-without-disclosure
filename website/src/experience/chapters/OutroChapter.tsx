@@ -1,12 +1,12 @@
-/** Chapter 7 — the outro, under "Now try to cheat."
+/** Chapter 7: the outro, under "Now try to forge a proof."
  *
  * Every chapter scattered evidence across the screen: hashed bits,
  * commitments, Merkle leaves, signature checks, zero-knowledge rounds. Here
- * the loose fragments drift home onto a single quiet ring — claims closing
- * into one verifiable whole — around the site's privacy-dot glyph: the
+ * the loose fragments drift home onto a single quiet ring (claims closing
+ * into one verifiable whole) around the site's privacy-dot glyph: the
  * secret at the center, sealed inside proof, visible only as a mark. The
  * assembly just orbits. There is nothing left to inspect and nothing left
- * to leak — which is exactly the invitation to try.
+ * to leak, which is exactly the invitation to try.
  *
  * Deliberately ambient: it must sit behind the centered DOM text, not
  * compete with it. All placement is deterministic per-index hashing, so a
@@ -24,14 +24,14 @@ import { usePalette } from "../shared/palette";
 /** How far the converged halo tips away from the camera (radians). */
 const RING_TILT = -0.55;
 
-// module-scope temps — useFrame must not allocate
+// module-scope temps: useFrame must not allocate
 const tmpObject = new THREE.Object3D();
 const tmpColor = new THREE.Color();
 const lineColor = new THREE.Color();
 const accentColor = new THREE.Color();
 
 const fract = (x: number): number => x - Math.floor(x);
-/** Deterministic per-index randomness — stable across remounts. */
+/** Deterministic per-index randomness, stable across remounts. */
 const hash = (i: number, salt: number): number =>
   fract(Math.sin(i * 127.1 + salt * 311.7) * 43758.5453);
 
@@ -82,7 +82,7 @@ export default function OutroChapter() {
     const t = state.clock.elapsedTime;
     const appear = smoothstep(phase(local, 0.05, 0.18));
     const converge = smoothstep(phase(local, 0.05, 0.35));
-    // exit: fade fully out by 0.97 — the sticky canvas is almost entirely
+    // exit: fade fully out by 0.97; the sticky canvas is almost entirely
     // scrolled off-screen by then, so the fade reads as the scene slipping
     // away with the page rather than a visible cut
     const settle = 1 - smoothstep(phase(local, 0.82, 0.97));

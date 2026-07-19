@@ -1,4 +1,4 @@
-/* Proof Without Disclosure — academic-lab aesthetic.
+/* Proof Without Disclosure: academic-lab aesthetic.
    Every color routes through custom properties so dark mode is one attribute. */
 
 :root {
@@ -47,9 +47,13 @@
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
-/* full-bleed sections use 100vw, which includes the scrollbar gutter —
-   clip the few phantom pixels instead of growing a horizontal scrollbar */
+/* full-bleed sections use 100vw, which includes the scrollbar gutter:
+   clip the few phantom pixels instead of growing a horizontal scrollbar.
+   body gets clip too because mobile Safari lets touch panning reach
+   overflow the html-level clip already hides; clip (unlike hidden) does
+   not create a scroll container, so position: sticky keeps working */
 html { overflow-x: hidden; overflow-x: clip; }
+body { overflow-x: clip; }
 
 body {
   margin: 0;
@@ -362,6 +366,10 @@ button:disabled { opacity: 0.45; cursor: not-allowed; }
 .dropzone.drag { border-color: var(--accent); background: var(--accent-soft); }
 .dropzone input { display: none; }
 
+/* wide tables scroll inside their own container instead of widening the page
+   (document-level horizontal overflow is still pannable on mobile Safari
+   even with the viewport clip below) */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 table.cmd-table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
 table.cmd-table th, table.cmd-table td { text-align: left; border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; vertical-align: top; }
 table.cmd-table code { white-space: nowrap; }
@@ -411,7 +419,7 @@ table.cmd-table code { white-space: nowrap; }
   height: 100svh;
   overflow: hidden;
   /* pull the sticky field's start up under the (sticky) header so it's
-     already flush with the viewport top at scroll 0 — otherwise it begins one
+     already flush with the viewport top at scroll 0; otherwise it begins one
      journey-offset low and snaps up on the first scroll. --field-pull is set
      live to the journey wrapper's own top offset (header + main padding),
      which changes when the nav wraps. */
@@ -437,7 +445,7 @@ table.cmd-table code { white-space: nowrap; }
   padding: 0 max(1.25rem, calc(50vw - 600px));
 }
 
-/* --- hero (flows with the scroll like everything else — any pinning
+/* --- hero (flows with the scroll like everything else; any pinning
    reads as "the page stopped responding") --- */
 .j-hero {
   pointer-events: auto;
@@ -458,7 +466,7 @@ table.cmd-table code { white-space: nowrap; }
   padding-top: 5vh;
 }
 /* soft scrim clearing the center for the title/controls while the field
-   stays vivid at the edges — theme-aware via --bg. Fades out while the hash
+   stays vivid at the edges, theme-aware via --bg. Fades out while the hash
    input is focused so the live fingerprint field pops into view. */
 .j-hero::before {
   content: "";
@@ -668,7 +676,7 @@ table.cmd-table code { white-space: nowrap; }
 /* fixed, not sticky: sticky sits at its natural position until the scroll
    catches up, which parked the corner controls just below the fold at
    scroll 0 and popped them in on the first wheel notch. Fixed pins to the
-   viewport from the first frame — controls present, no hitch. */
+   viewport from the first frame: controls present, no hitch. */
 .journey-hud-pin {
   position: fixed;
   inset: 0;

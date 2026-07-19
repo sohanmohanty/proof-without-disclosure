@@ -22,7 +22,7 @@ export default function Toolkit() {
   return (
     <LabPage
       kicker="Local Toolkit"
-      title="prooflab — the lab on your own machine"
+      title="prooflab: the lab on your own machine"
       question="Why trust a website when you can run the math yourself?"
       intro={
         <p>
@@ -45,7 +45,7 @@ prooflab --help`}
         />
         <p className="footnote">
           Python 3.10+. The core commands (hash, commit, merkle, schnorr,
-          zk-color) use only the standard library — every line of protocol
+          zk-color) use only the standard library; every line of protocol
           logic is{" "}
           <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
             in the repo to read
@@ -55,7 +55,7 @@ prooflab --help`}
       </Section>
 
       <Section title="Command reference">
-        <table className="cmd-table">
+        <div className="table-scroll"><table className="cmd-table">
           <thead>
             <tr>
               <th>Command</th>
@@ -70,7 +70,7 @@ prooflab --help`}
               </tr>
             ))}
           </tbody>
-        </table>
+        </table></div>
       </Section>
 
       <Section title="A five-minute session">
@@ -90,15 +90,15 @@ $ prooflab merkle verify --proof proof.json
 [ok] proof valid
   "student_4" is in the set committed to by root 7d3f0e6a…
 
-# now drag proof.json into the box below — the browser agrees.`}
+# now drag proof.json into the box below; the browser agrees.`}
         />
       </Section>
 
-      <Section title="Universal verifier — the interop test">
+      <Section title="Universal verifier: the interop test">
         <p>
           Drop <em>any</em> prooflab JSON file. The browser detects the type
           and verifies it with an implementation that shares not a single line
-          of code with the CLI — only a spec (<code>docs/format-spec.md</code>)
+          of code with the CLI: only a spec (<code>docs/format-spec.md</code>)
           and a pinned set of shared test vectors. That is how real
           cryptographic standards stay honest.
         </p>

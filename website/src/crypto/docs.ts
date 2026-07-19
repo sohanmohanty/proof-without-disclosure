@@ -1,4 +1,4 @@
-/** Builders for prooflab JSON documents — mirrors prooflab/formats.py, so
+/** Builders for prooflab JSON documents. Mirrors prooflab/formats.py, so
  * files downloaded from the website verify in the CLI. */
 
 import type { ProofStep } from "./merkle";

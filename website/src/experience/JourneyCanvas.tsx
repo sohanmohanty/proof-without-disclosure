@@ -1,5 +1,5 @@
 /** The single <Canvas> behind the whole journey: camera rig, lights, and
- * windowed mounting of chapter scenes (active chapter ± 1 only — scenes are
+ * windowed mounting of chapter scenes (active chapter ± 1 only; scenes are
  * unmounted once they are more than a viewport away). `flat` disables tone
  * mapping so palette colors render exactly as their CSS hex values.
  */
@@ -29,7 +29,7 @@ const SCENES: Record<ChapterId, ComponentType> = {
 };
 
 /** Each chapter's focal composition sits left or right of center (the DOM
- * caption takes the other side) — on narrow viewports the captions become
+ * caption takes the other side); on narrow viewports the captions become
  * centered cards instead, so the camera pans to the focal point. */
 const FOCAL_X: Record<ChapterId, number> = {
   hero: 0,
@@ -63,8 +63,8 @@ function CameraRig() {
     const active = CHAPTERS[activeChapterIndex(journey.offsetVh)].id;
     const k = 1 - Math.pow(2, -dt / 0.3);
     focalNow.current += (FOCAL_X[active] * narrow - focalNow.current) * k;
-    // on narrow viewports the caption card owns the top half of the screen —
-    // raise the view so the scene reads in the lower half
+    // on narrow viewports the caption card owns the top half of the screen,
+    // so raise the view and let the scene read in the lower half
     const lookY = narrow * 2.2;
     camera.position.x +=
       (journey.pointerX * 0.45 + focalNow.current - camera.position.x) * k;

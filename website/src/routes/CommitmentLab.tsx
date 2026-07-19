@@ -43,14 +43,14 @@ export default function CommitmentLab() {
       question="How can you lock in a secret without revealing it yet?"
       intro={
         <p>
-          Predict tonight's game — but publish the prediction only after it
+          Predict tonight's game, but publish the prediction only after it
           ends, and everyone should still believe you made it beforehand. A
           commitment is a cryptographic envelope: sealed now, opened later,
           and impossible to swap in between.
         </p>
       }
     >
-      <Section title="Step 1 — Seal the envelope">
+      <Section title="Step 1: Seal the envelope">
         <div className="split">
           <div>
             <label htmlFor="secret">Your secret prediction</label>
@@ -88,11 +88,11 @@ export default function CommitmentLab() {
             {committed ? (
               <>
                 <HexDigest
-                  label="commitment — post this publicly, it reveals nothing"
+                  label="commitment: post this publicly, it reveals nothing"
                   value={committed.commitment}
                 />
                 <HexDigest
-                  label="salt — keep this private until the reveal"
+                  label="salt: keep this private until the reveal"
                   value={committed.salt}
                 />
                 <div className="controls">
@@ -120,7 +120,7 @@ export default function CommitmentLab() {
         </div>
       </Section>
 
-      <Section title="Step 2 — The game ends. Open the envelope.">
+      <Section title="Step 2: The game ends. Open the envelope.">
         <p>
           Revealing means publishing the secret <em>and</em> the salt. Anyone
           can recompute SHA-256(salt : secret) and compare it with the
@@ -137,7 +137,7 @@ export default function CommitmentLab() {
             <ul>
               <li>
                 Recomputed hash {revealResult ? "matches" : "does not match"} the
-                published commitment — the prediction{" "}
+                published commitment; the prediction{" "}
                 {revealResult ? "was locked in before the game." : "was tampered with."}
               </li>
             </ul>
@@ -149,7 +149,7 @@ export default function CommitmentLab() {
         <p>
           You committed, the game went the other way, and now you would like to
           "reveal" a different prediction with the same salt. Binding says this
-          should fail — succeeding would mean finding a second input with the
+          should fail; succeeding would mean finding a second input with the
           same SHA-256 output.
         </p>
         <div className="split">
@@ -173,7 +173,7 @@ export default function CommitmentLab() {
                 <strong>
                   {cheatResult
                     ? "✓ (You typed the original secret back in!)"
-                    : "✗ Caught — reveal rejected"}
+                    : "✗ Caught: reveal rejected"}
                 </strong>
                 <ul>
                   <li>
@@ -193,7 +193,7 @@ export default function CommitmentLab() {
           The <code>prooflab</code> toolkit writes the same format:{" "}
           <code>prooflab commit "my prediction"</code> produces{" "}
           <code>commitment.json</code> and <code>reveal.json</code>. Drop both
-          here and the browser checks them — two implementations, one spec.
+          here and the browser checks them: two implementations, one spec.
         </p>
         <Dropzone hint="Drop commitment.json together with reveal.json" />
       </Section>
@@ -206,7 +206,7 @@ export default function CommitmentLab() {
             "Anyone can verify the reveal with one hash",
           ]}
           doesnt={[
-            "Doesn't prove WHEN you committed — pair it with a timestamped public post",
+            "Doesn't prove WHEN you committed: pair it with a timestamped public post",
             "Doesn't force you to ever reveal",
             "Both properties are computational: they lean on SHA-256's strength",
           ]}
@@ -231,8 +231,8 @@ publish(c)                              check SHA256(hex(salt)+":"+secret) == c`
             both properties reduce to properties of SHA-256 (preimage and
             collision resistance). Pedersen commitments (
             <code>c = g^m · h^r</code> in a prime-order group) flip the
-            trade-off: <em>perfectly</em> hiding — even infinite compute learns
-            nothing — but only computationally binding. Perfect hiding and
+            trade-off: <em>perfectly</em> hiding (even infinite compute learns
+            nothing) but only computationally binding. Perfect hiding and
             perfect binding together are impossible: a commitment that is
             information-theoretically both would determine the secret uniquely
             while carrying no information about it.

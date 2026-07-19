@@ -10,7 +10,7 @@ local tools.
 
 Specific, deliberate departures from production practice:
 
-1. **The toy Schnorr group (p = 23) is breakable by hand — on purpose.**
+1. **The toy Schnorr group (p = 23) is breakable by hand, on purpose.**
    Its entire role is to make discrete-log attacks watchable. Only the
    2048-bit RFC 3526 group illustrates realistic hardness, and even that
    usage here is educational, not hardened.
@@ -26,8 +26,8 @@ Specific, deliberate departures from production practice:
    them.
 
 Where real primitives are needed (SHA-256, ECDSA P-256), the project uses
-vetted implementations — the browser's Web Crypto API, Python's `hashlib`,
-and the `cryptography` package — and never reimplements them.
+vetted implementations (the browser's Web Crypto API, Python's `hashlib`,
+and the `cryptography` package) and never reimplements them.
 
 If you need real security: use maintained, audited libraries and protocols
 (libsodium, TLS, age, signify, …), not this project.

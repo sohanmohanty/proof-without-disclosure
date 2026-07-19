@@ -1,4 +1,4 @@
-"""Generate vectors/test-vectors.json — the file that pins the Python and
+"""Generate vectors/test-vectors.json, the file that pins the Python and
 TypeScript implementations to each other.
 
 Both test suites load this file and re-verify every entry. If either

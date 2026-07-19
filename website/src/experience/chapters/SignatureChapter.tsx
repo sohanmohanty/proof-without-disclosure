@@ -1,14 +1,14 @@
-/** Chapter 4 — digital signatures.
+/** Chapter 4: digital signatures.
  *
- * The textbook curve y² = x³ − 3x + 3 over the reals — the P-256 equation
- * family — draws itself on, then the chord-and-tangent group law runs live:
+ * The textbook curve y² = x³ − 3x + 3 over the reals (the P-256 equation
+ * family) draws itself on, then the chord-and-tangent group law runs live:
  * pick P and Q, the chord through them meets the curve a third time, drop
  * to the mirror point and that is P + Q. Every coordinate here is exact
- * real arithmetic (λ, x₃, y₃), never staged. The dance only runs one way —
- * adding points is easy, un-adding them is infeasible — which is why a
+ * real arithmetic (λ, x₃, y₃), never staged. The dance only runs one way
+ * (adding points is easy, un-adding them is infeasible), which is why a
  * private scalar can stamp a document: the seal descends and leaves an
  * imprint of ticks keyed to a real 64-byte r||s ECDSA P-256 signature
- * produced by Web Crypto (crypto/signatures.ts) — one tick per byte, or
+ * produced by Web Crypto (crypto/signatures.ts): one tick per byte, or
  * every other byte on low quality.
  *
  * Follows the exemplar contract in HeroField.tsx: chapterFrame() gate,
@@ -34,7 +34,7 @@ const BARS = BAR_WIDTHS.length;
 const IMPRINT_X = 0.48;
 const IMPRINT_Y = -0.82;
 
-// module-scope temps — useFrame must not allocate
+// module-scope temps: useFrame must not allocate
 const tmpObject = new THREE.Object3D();
 const tmpColor = new THREE.Color();
 const tmpVec = new THREE.Vector3();
@@ -45,7 +45,7 @@ const UNIT_Y = new THREE.Vector3(0, 1, 0);
 interface AdditionPair {
   P: THREE.Vector3;
   Q: THREE.Vector3;
-  /** P + Q — the reflected point, on the lower branch for these pairs. */
+  /** P + Q: the reflected point, on the lower branch for these pairs. */
   R: THREE.Vector3;
   /** Third intersection of the chord with the curve (mirror of R). */
   Rp: THREE.Vector3;
@@ -81,7 +81,7 @@ export default function SignatureChapter() {
   const stamp = useRef<THREE.Mesh>(null!);
   const stampMat = useRef<THREE.MeshStandardMaterial>(null!);
 
-  /** Real 64-byte r||s signature — drives the imprint's tick lengths. */
+  /** Real 64-byte r||s signature; drives the imprint's tick lengths. */
   const [sig, setSig] = useState<Uint8Array | null>(null);
   useEffect(() => {
     let alive = true;
@@ -89,7 +89,7 @@ export default function SignatureChapter() {
       const keys = await generateKeyPair();
       const hex = await sign(
         keys.privateKey,
-        utf8("proof without disclosure — chapter 4"),
+        utf8("proof without disclosure, chapter 4"),
       );
       if (alive) setSig(hexToBytes(hex));
     })().catch(() => {
@@ -190,7 +190,7 @@ export default function SignatureChapter() {
     tubeMat.current.color.copy(palette.inkSoft);
     tubeMat.current.opacity = fade;
 
-    // (b) the chord-and-tangent loop — a pure function of elapsed time
+    // (b) the chord-and-tangent loop: a pure function of elapsed time
     const cycle = Math.floor(t / LOOP_SECONDS);
     const u = t / LOOP_SECONDS - cycle;
     const pair = scene.pairs[cycle % scene.pairs.length];
@@ -327,7 +327,7 @@ export default function SignatureChapter() {
     ringMat.current.opacity =
       imprint * (0.75 + 0.25 * (0.5 + 0.5 * Math.sin(t * 2.4))) * fade;
 
-    // 64 ticks around the seal — the real r||s bytes, one tick per byte
+    // 64 ticks around the seal: the real r||s bytes, one tick per byte
     tmpColor.copy(palette.accent);
     const stride = 64 / TICKS;
     for (let i = 0; i < TICKS; i++) {

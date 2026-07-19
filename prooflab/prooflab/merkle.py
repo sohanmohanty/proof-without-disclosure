@@ -12,7 +12,7 @@ Two deliberate design choices, both of which close real attacks:
 2. Odd nodes are promoted, not duplicated. When a level has an odd number of
    nodes, the last node is carried up unchanged. Bitcoin instead duplicates
    the last hash, which makes two different lists (one with a duplicated
-   final transaction) produce the same root — the ambiguity behind
+   final transaction) produce the same root, the ambiguity behind
    CVE-2012-2459. Promotion keeps the list→root mapping injective.
 """
 
@@ -71,7 +71,7 @@ def build_tree(items: list[str]) -> MerkleTree:
 def generate_proof(tree: MerkleTree, index: int) -> list[ProofStep]:
     """Sibling path from leaf `index` to the root.
 
-    A promoted node has no sibling at that level, so no step is recorded —
+    A promoted node has no sibling at that level, so no step is recorded;
     verification simply carries the running hash upward, mirroring build.
     """
     if not 0 <= index < tree.leaf_count:

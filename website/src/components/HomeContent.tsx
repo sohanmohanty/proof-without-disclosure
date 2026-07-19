@@ -20,7 +20,7 @@ const MODULES = [
     num: "03",
     title: "Merkle Trees",
     blurb:
-      "How can one short root vouch for a whole dataset — and a few hashes prove membership?",
+      "How can one short root vouch for a whole dataset, and a few hashes prove membership?",
   },
   {
     to: "/signatures",
@@ -34,7 +34,7 @@ const MODULES = [
     num: "05",
     title: "Zero-Knowledge Proofs",
     blurb:
-      "How can you convince a skeptic you know a solution — without showing it?",
+      "How can you convince a skeptic you know a solution, without showing it?",
   },
   {
     to: "/schnorr",
@@ -64,7 +64,7 @@ export default function HomeContent() {
           <h3>Local Toolkit</h3>
           <p>
             Download <code>prooflab</code> and generate the same proofs on
-            your own machine — then verify them here.
+            your own machine, then verify them here.
           </p>
         </Link>
       </div>
@@ -75,7 +75,7 @@ export default function HomeContent() {
           Cryptography is usually introduced as the art of hiding messages.
           This lab is about the other half of the field: <em>proving</em>{" "}
           things. Each module answers the same question at a higher level of
-          ambition — what can one person prove to another without revealing
+          ambition: what can one person prove to another without revealing
           more than necessary?
         </p>
         <p>
@@ -85,7 +85,7 @@ export default function HomeContent() {
           A signature proves an identity stands behind a message. And
           zero-knowledge proofs push the idea to its logical extreme:
           conviction without disclosure. The final module shows the punchline
-          hiding in the mathematics — <strong>a Schnorr signature is just a
+          hiding in the mathematics: <strong>a Schnorr signature is just a
           zero-knowledge proof made non-interactive by a hash function</strong>.
           The pieces were one machine all along.
         </p>

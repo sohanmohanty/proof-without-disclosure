@@ -1,8 +1,8 @@
 /** Bit-field math for the hero lattice.
  *
  * The hero visualizes real SHA-256 output: the digest of whatever the
- * visitor types is expanded — deterministically, by hash-chaining with the
- * same sha256Hex the Hash lab uses — into enough bits to fill the whole
+ * visitor types is expanded (deterministically, by hash-chaining with the
+ * same sha256Hex the Hash lab uses) into enough bits to fill the whole
  * field. Pure data, no three.js, so it is unit-testable in node.
  */
 
@@ -19,8 +19,8 @@ export function bitsFromHex(hex: string): Uint8Array {
   return bits;
 }
 
-/** Fill `count` bits: the digest's own 256 bits come first — the lattice
- * literally begins with the fingerprint it claims to show — and the rest
+/** Fill `count` bits: the digest's own 256 bits come first (the lattice
+ * literally begins with the fingerprint it claims to show) and the rest
  * is deterministic hash-chaining, block i = SHA-256(`digest:i`). */
 export async function expandDigestBits(
   digestHex: string,

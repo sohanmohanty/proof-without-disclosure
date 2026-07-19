@@ -1,13 +1,13 @@
-/** Chapter 5 — zero-knowledge graph coloring.
+/** Chapter 5: zero-knowledge graph coloring.
  *
  * The Petersen graph as a slowly orbiting 3D cage: outer ring, inner
- * pentagram, five spokes — 10 nodes, 15 edges, chromatic number exactly 3.
+ * pentagram, five spokes: 10 nodes, 15 edges, chromatic number exactly 3.
  * The prover's real witness (PETERSEN.coloring from graphColoring.ts) stays
  * sealed inside neutral envelopes. Each round the verifier points at one
- * edge: its two endpoints swell and reveal their colors — always different —
+ * edge: its two endpoints swell and reveal their colors (always different),
  * hold, then reseal; every node does a quick shuffle-spin as the three
  * labels pass through a fresh permutation of {1,2,3} before the next round.
- * One inequality per round, nothing else — the reshuffle destroys any memory
+ * One inequality per round, nothing else; the reshuffle destroys any memory
  * between rounds. The challenge walks (r·7 mod 15), 7 coprime to 15, so all
  * fifteen edges get their turn: certainty stacks at (1 − 1/15) per round.
  */
@@ -28,7 +28,7 @@ const ROUND_SECONDS = 2.4;
 
 /** All 6 permutations of the labels {1,2,3}. Round r uses PERMS[r % 6]
  * composed with a cyclic offset from ⌊r/6⌋, so consecutive rounds always
- * relabel differently — a deterministic stand-in for the protocol's uniform
+ * relabel differently: a deterministic stand-in for the protocol's uniform
  * shuffle that stays a pure function of elapsed time (remount-safe). */
 const PERMS = [
   [1, 2, 3],
@@ -39,7 +39,7 @@ const PERMS = [
   [3, 2, 1],
 ];
 
-// module-scope temps — useFrame must not allocate
+// module-scope temps: useFrame must not allocate
 const tmpObject = new THREE.Object3D();
 const tmpColor = new THREE.Color();
 const sealedColor = new THREE.Color();

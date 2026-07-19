@@ -2,7 +2,7 @@
 
 export const clamp01 = (x: number): number => (x < 0 ? 0 : x > 1 ? 1 : x);
 
-/** Remap `x` from [a, b] to [0, 1], clamped — the beat primitive: every
+/** Remap `x` from [a, b] to [0, 1], clamped. The beat primitive: every
  * chapter carves its local progress into phases with this. */
 export function phase(x: number, a: number, b: number): number {
   return clamp01((x - a) / (b - a));

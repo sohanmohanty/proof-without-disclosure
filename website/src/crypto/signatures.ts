@@ -1,4 +1,4 @@
-/** ECDSA P-256 via Web Crypto — real signatures from a vetted API, never
+/** ECDSA P-256 via Web Crypto: real signatures from a vetted API, never
  * hand-rolled curve math. Interop formats match the Python side:
  * 65-byte uncompressed public key, 64-byte raw r||s signature (see
  * docs/format-spec.md). */

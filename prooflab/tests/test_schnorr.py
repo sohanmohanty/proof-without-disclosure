@@ -75,7 +75,7 @@ def test_interactive_protocol_honest():
 def test_cheater_succeeds_at_rate_one_over_q():
     """A prover without x passes only when the challenge matches their guess:
     exactly 1/q. In the toy group (q = 11), 2000 trials should land near
-    2000/11 ≈ 182 — this is soundness error made visible."""
+    2000/11 ≈ 182. This is soundness error made visible."""
     group = schnorr.TOY_GROUP
     key = schnorr.keygen(group, x=7)
     rng = random.Random(42)
@@ -109,7 +109,7 @@ def test_two_challenges_extract_private_key():
 
 def test_simulated_transcripts_verify():
     """The zero-knowledge argument, executed: pick c and s FIRST, derive
-    R = g^s * y^(-c) — a valid-looking transcript forged without the key."""
+    R = g^s * y^(-c): a valid-looking transcript forged without the key."""
     group = schnorr.REAL_GROUP
     key = schnorr.keygen(group)
     c = 123456789

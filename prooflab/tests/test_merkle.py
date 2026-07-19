@@ -64,7 +64,7 @@ def test_forged_internal_node_leaf_rejected():
 
 
 def test_odd_promotion_differs_from_duplication():
-    """Promoting the odd node must NOT equal Bitcoin-style duplication —
+    """Promoting the odd node must NOT equal Bitcoin-style duplication;
     duplication is what allowed CVE-2012-2459's ambiguous trees."""
     items = ["a", "b", "c"]
     tree = merkle.build_tree(items)

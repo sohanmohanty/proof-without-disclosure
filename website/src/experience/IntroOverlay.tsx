@@ -1,5 +1,5 @@
 /** The loading screen: a real digest resolves out of hex noise, gets
- * verified, and the overlay lifts. It is diegetic — the string being
+ * verified, and the overlay lifts. It is diegetic: the string being
  * "computed" really is SHA-256 of "proof-without-disclosure", and the wait
  * really is the 3D chunk warming up behind it. Plays once per session;
  * any key, click, or scroll skips it. */
@@ -32,7 +32,7 @@ function markPlayed(): void {
   try {
     sessionStorage.setItem(SESSION_KEY, "1");
   } catch {
-    /* private mode — the in-memory flag still covers this page load */
+    /* private mode: the in-memory flag still covers this page load */
   }
 }
 
@@ -50,7 +50,7 @@ export default function IntroOverlay({ onDone }: { onDone: () => void }) {
   const [display, setDisplay] = useState(() => randomHex(64));
   const [stage, setStage] = useState<Stage>("scramble");
   // the animation lifecycle must not restart when the parent re-renders
-  // (it does so on every scroll past the first chapter) — keep the latest
+  // (it does so on every scroll past the first chapter), so keep the latest
   // callback in a ref and run the effect exactly once
   const onDoneRef = useRef(onDone);
   onDoneRef.current = onDone;
@@ -102,7 +102,7 @@ export default function IntroOverlay({ onDone }: { onDone: () => void }) {
       window.removeEventListener("pointerdown", skip);
       window.removeEventListener("wheel", skip);
     };
-    // run exactly once per mount — restarting on prop identity changes
+    // run exactly once per mount; restarting on prop identity changes
     // would resurrect a skipped overlay (the parent re-renders on scroll)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -118,7 +118,7 @@ export default function IntroOverlay({ onDone }: { onDone: () => void }) {
         <p className={`intro-status${stage !== "scramble" ? " ok" : ""}`}>
           {stage === "scramble"
             ? `computing sha256("${SOURCE}") …`
-            : "✓ digest verified — entering the lab"}
+            : "✓ digest verified, entering the lab"}
         </p>
       </div>
     </div>

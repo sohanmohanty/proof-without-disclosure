@@ -1,5 +1,5 @@
 /** Suspense fallback shown while the 3D chunk downloads. No three.js
- * imports — this ships in the main bundle. Mirrors the intro overlay's
+ * imports; this ships in the main bundle. Mirrors the intro overlay's
  * layout so the handoff into the real experience is seamless. */
 
 export default function HeroFallback() {

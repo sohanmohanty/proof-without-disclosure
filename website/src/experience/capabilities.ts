@@ -1,10 +1,10 @@
 /** Feature gates for the 3D landing. The journey must never load for
  * visitors who can't run it (no WebGL) or shouldn't be made to sit through
- * it (prefers-reduced-motion) — they get the classic page instead. And
+ * it (prefers-reduced-motion); they get the classic page instead. And
  * ?classic=1 is an always-available escape hatch, machine problems or not.
  *
  * This module is imported eagerly by the router, so it must never import
- * three.js — the whole point is deciding *whether* to download that chunk.
+ * three.js: the whole point is deciding *whether* to download that chunk.
  */
 
 export interface Capabilities {

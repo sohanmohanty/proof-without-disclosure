@@ -1,18 +1,18 @@
-/** Chapter 6 — the Schnorr protocol, and the moment the verifier vanishes.
+/** Chapter 6: the Schnorr protocol, and the moment the verifier vanishes.
  *
  * An eleven-hour clock: the subgroup of quadratic residues mod 23 generated
  * by g = 4, each element pinned at angle value/23 around the ring. Placing
- * by VALUE scatters consecutive powers of g all over the dial — raising to
+ * by VALUE scatters consecutive powers of g all over the dial; raising to
  * an exponent looks like jumping, which is the point. The faint chord
  * spiral threading the markers in exponent order is the path only the
  * prover can walk.
  *
  * The loop replays a real transcript (x = 7, nonce r = 5 → y = 8, R = 12,
  * with c and s straight from the Fiat–Shamir hash in crypto/schnorr):
- * commit, challenge, respond — then two tracers race the ring to g^s and
+ * commit, challenge, respond. Then two tracers race the ring to g^s and
  * to R·y^c and land on the SAME marker. That collision is the whole
  * verification equation. In the finale the verifier orb dissolves and a
- * small dark slab — the hash compressor from chapter 1 — takes its place:
+ * small dark slab (the hash compressor from chapter 1) takes its place:
  * the dialogue became a hash, and the loop keeps running without anyone
  * on the other end.
  */
@@ -42,7 +42,7 @@ const RADIUS = 2.9;
 const PERIOD = 7; // seconds per protocol round
 const TAU = Math.PI * 2;
 const P = Number(TOY_GROUP.p); // 23
-const ORDER = Number(TOY_GROUP.q); // 11 — subgroup size
+const ORDER = Number(TOY_GROUP.q); // 11 - subgroup size
 
 // fixed toy transcript: x = 7, r = 5  →  y = g^x = 8, R = g^r = 12
 const SECRET_X = 7n;
@@ -56,7 +56,7 @@ const VERIFIER = { x: 2.6, y: 2.6, z: 0.45 };
 
 const angleOf = (v: number): number => (v / P) * TAU;
 
-// module-scope temps — useFrame must not allocate
+// module-scope temps: useFrame must not allocate
 const tmpObject = new THREE.Object3D();
 const tmpColor = new THREE.Color();
 
@@ -85,7 +85,7 @@ export default function SchnorrChapter() {
   const slab = useRef<THREE.Mesh>(null!);
   const slabMat = useRef<THREE.MeshStandardMaterial>(null!);
 
-  // real crypto, computed once — the ring renders immediately, protocol
+  // real crypto, computed once; the ring renders immediately, protocol
   // beats start when c and s arrive
   const [transcript, setTranscript] = useState<Transcript | null>(null);
   useEffect(() => {
@@ -147,7 +147,7 @@ export default function SchnorrChapter() {
     };
   }, []);
 
-  // faint dial behind the markers (vertex count halved on low quality —
+  // faint dial behind the markers (vertex count halved on low quality;
   // marker/chord counts are data, fixed at 11 by the group order)
   const dial = useMemo(() => {
     const n = low ? 64 : 128;
@@ -162,7 +162,7 @@ export default function SchnorrChapter() {
   }, [low]);
 
   // verification sweep geometry: g^s from the identity going CCW, R·y^c
-  // from R going CW — both arcs end on the same marker (g^s = R·y^c)
+  // from R going CW; both arcs end on the same marker (g^s = R·y^c)
   const sweep = useMemo(() => {
     if (!transcript) return null;
     const left = Number(modPow(TOY_GROUP.g, BigInt(transcript.s), TOY_GROUP.p));
@@ -193,7 +193,7 @@ export default function SchnorrChapter() {
 
     const appear = smoothstep(phase(local, 0.09, 0.16));
     // protocol beats need the real c/s; the loop keeps running through the
-    // finale — after Fiat–Shamir the challenge just comes from the slab
+    // finale: after Fiat–Shamir the challenge just comes from the slab
     const gate =
       (transcript ? 1 : 0) * smoothstep(phase(local, 0.15, 0.2)) * exitFade;
 
@@ -274,7 +274,7 @@ export default function SchnorrChapter() {
     proverMat.current.color.copy(palette.accent);
     proverMat.current.opacity = exitFade;
 
-    // verifier dissolves during the finale — a shiver, then gone
+    // verifier dissolves during the finale: a shiver, then gone
     const dissolve = smoothstep(phase(local, 0.72, 0.8));
     const shake = bump(phase(local, 0.72, 0.8)) * 0.07;
     const hoverY = VERIFIER.y + Math.sin(t * 0.9) * 0.07;
@@ -297,7 +297,7 @@ export default function SchnorrChapter() {
     slabMat.current.opacity = slabIn * exitFade;
 
     // --- protocol messages -------------------------------------------------
-    // B: the challenge — a warn cube, verifier → prover
+    // B: the challenge, a warn cube, verifier → prover
     const pB = phase(lp, 0.22, 0.39);
     const eB = easeInOutCubic(pB);
     cube.current.position.set(
@@ -315,7 +315,7 @@ export default function SchnorrChapter() {
     const tr = tracers.current;
     tmpObject.rotation.set(0, 0, 0);
 
-    // A: commit — prover sends R to the ring
+    // A: commit; prover sends R to the ring
     const pA = phase(lp, 0.02, 0.19);
     const eA = easeInOutCubic(pA);
     tmpObject.position.set(
@@ -328,7 +328,7 @@ export default function SchnorrChapter() {
     tr.setMatrixAt(0, tmpObject.matrix);
     tr.setColorAt(0, tmpColor.copy(palette.accent));
 
-    // C: respond — s travels prover → verifier
+    // C: respond; s travels prover → verifier
     const pC = phase(lp, 0.42, 0.59);
     const eC = easeInOutCubic(pC);
     tmpObject.position.set(
@@ -341,7 +341,7 @@ export default function SchnorrChapter() {
     tr.setMatrixAt(1, tmpObject.matrix);
     tr.setColorAt(1, tmpColor.copy(palette.accent));
 
-    // D: verify — g^s and R·y^c sweep the dial and collide on one marker
+    // D: verify; g^s and R·y^c sweep the dial and collide on one marker
     const pD = easeInOutCubic(phase(lp, 0.62, 0.88));
     const presence =
       smoothstep(phase(lp, 0.62, 0.67)) *

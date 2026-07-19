@@ -1,24 +1,29 @@
-/** The 3D journey — the whole scroll experience, lazy-loaded as one chunk
+/** The 3D journey: the whole scroll experience, lazy-loaded as one chunk
  * so three.js never touches the main bundle. Layout: a sticky
  * full-viewport canvas with the chapter caption sections scrolling over it
- * (native scroll — nothing is hijacked, keyboard and screen readers see a
+ * (native scroll; nothing is hijacked, keyboard and screen readers see a
  * normal document), and a HUD layer (progress dots, skip, classic link)
  * painted above both. */
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import JourneyCanvas from "./JourneyCanvas";
-import IntroOverlay, { introAlreadyPlayed } from "./IntroOverlay";
 import { CaptionFor, HeroHeader, OutroContent } from "./captions";
 import { bindJourney, detectQuality, journey } from "./journeyState";
 import { scrollToModules } from "./scroll";
 import { activeChapterIndex, CHAPTERS } from "./timeline";
 
-export default function JourneyExperience() {
+export default function JourneyExperience({
+  introActive = false,
+}: {
+  // owned by Landing (outside this lazy chunk) so the overlay can cover the
+  // page before this chunk has even downloaded; passed in only to keep the
+  // HUD out of the accessibility tree while the overlay is up
+  introActive?: boolean;
+}) {
   const wrapper = useRef<HTMLDivElement>(null);
   const [running, setRunning] = useState(true);
   const [active, setActive] = useState(0);
-  const [intro, setIntro] = useState(() => !introAlreadyPlayed());
   // decide the quality tier during render, before the canvas mounts
   useState(() => {
     journey.quality = detectQuality();
@@ -33,7 +38,7 @@ export default function JourneyExperience() {
     if (!el) return;
     const root = document.documentElement;
     const apply = () => {
-      // document-space top of the wrapper — independent of current scroll
+      // document-space top of the wrapper, independent of current scroll
       const top = el.getBoundingClientRect().top + window.scrollY;
       root.style.setProperty("--field-pull", `${Math.max(0, top)}px`);
     };
@@ -54,7 +59,7 @@ export default function JourneyExperience() {
     if (!el) return;
     const cleanup = bindJourney(el);
     // stop the render loop entirely once the visitor scrolls past;
-    // observers may batch records — only the newest one is current
+    // observers may batch records; only the newest one is current
     const io = new IntersectionObserver((entries) =>
       setRunning(entries[entries.length - 1].isIntersecting),
     );
@@ -80,7 +85,6 @@ export default function JourneyExperience() {
 
   return (
     <>
-      {intro && <IntroOverlay onDone={() => setIntro(false)} />}
       <div className="journey" ref={wrapper}>
         <div className="journey-canvas">
           <JourneyCanvas running={running} />
@@ -106,7 +110,7 @@ export default function JourneyExperience() {
         </div>
         {/* HUD: its own layer above the caption sections, after them in the
             DOM so it both paints and tabs last */}
-        <div className="journey-hud" aria-hidden={intro ? true : undefined}>
+        <div className="journey-hud" aria-hidden={introActive ? true : undefined}>
           {/* fixed-positioned; hidden once the journey leaves the viewport so
               the controls don't float over the module grid below */}
           <div

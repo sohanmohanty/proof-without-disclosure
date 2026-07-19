@@ -1,4 +1,4 @@
-"""prooflab — educational cryptography toolkit for Proof Without Disclosure.
+"""prooflab: educational cryptography toolkit for Proof Without Disclosure.
 
 Generate and verify hashes, commitments, Merkle proofs, Schnorr proofs,
 and digital signatures locally. Educational use only: this code is written

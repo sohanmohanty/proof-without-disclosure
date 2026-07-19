@@ -1,6 +1,6 @@
 /** Unit tests for the 3D journey's pure logic: scroll timeline, digest
  * bit-field expansion, easing, smoothing, and feature gates. The WebGL
- * scenes themselves are verified in the browser — everything they are
+ * scenes themselves are verified in the browser; everything they are
  * driven by is tested here. */
 
 import { describe, expect, it } from "vitest";
@@ -77,8 +77,8 @@ describe("hero bit field", () => {
     const b = await expandDigestBits(digest, 1000);
     expect(a).toEqual(b);
     expect(a.length).toBe(1000);
-    // the field leads with the digest itself — the fingerprint the hero
-    // claims to show — then continues with SHA-256(digest + ":0"), ...
+    // the field leads with the digest itself (the fingerprint the hero
+    // claims to show), then continues with SHA-256(digest + ":0"), ...
     expect(Array.from(a.subarray(0, 256))).toEqual(
       Array.from(bitsFromHex(digest)),
     );

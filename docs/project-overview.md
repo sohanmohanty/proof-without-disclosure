@@ -1,4 +1,4 @@
-# Project overview — Proof Without Disclosure
+# Project overview: Proof Without Disclosure
 
 ## The central question
 
@@ -9,7 +9,7 @@ revealing private information?
 
 Most software answers "how do we compute this faster?" Cryptography answers
 a stranger and more social question: how do people who do not trust each
-other cooperate anyway? Its answers are not policies or promises — they are
+other cooperate anyway? Its answers are not policies or promises; they are
 mathematical objects whose misuse is not forbidden but *infeasible*. That
 inversion (trust as a theorem, not an assumption) is the intellectual pull
 of this project.
@@ -22,11 +22,11 @@ Encryption gets the headlines, but the deeper primitive is proof:
 - "I predicted this before it happened." (commitment)
 - "My name is on the approved list you can't see." (membership)
 - "I wrote this message." (authenticity)
-- "I know the secret — and you may not have it." (zero-knowledge)
+- "I know the secret, and you may not have it." (zero-knowledge)
 
 Each is a claim someone can *check* without the claimant surrendering
-anything beyond the claim itself. The project's theme — trust without
-exposure — is the thread connecting all five.
+anything beyond the claim itself. The project's theme, trust without
+exposure, is the thread connecting all five.
 
 ## What the website teaches
 
@@ -45,8 +45,8 @@ a hash function.
 `prooflab` is a Python CLI that generates and verifies the same objects
 locally: file hashes, commitments and reveals, Merkle trees and membership
 proofs, ECDSA signatures, Schnorr proofs, and a zero-knowledge coloring
-simulation. It shares no code with the website — only a byte-level format
-spec and a pinned set of test vectors — so proofs cross between terminal and
+simulation. It shares no code with the website (only a byte-level format
+spec and a pinned set of test vectors), so proofs cross between terminal and
 browser in both directions. The core uses only the Python standard library
 and is meant to be read.
 

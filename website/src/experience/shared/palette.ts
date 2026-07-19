@@ -1,7 +1,7 @@
 /** Theme-aware colors for the 3D scenes: reads the site's CSS custom
  * properties so the WebGL world obeys the same light/dark theme as the rest
  * of the page. The returned object is stable and its Colors are mutated in
- * place when the theme flips — scenes should `.copy()` / `.lerpColors()`
+ * place when the theme flips; scenes should `.copy()` / `.lerpColors()`
  * from these inside useFrame (cheap) so a theme change propagates
  * mid-animation without a React re-render.
  */

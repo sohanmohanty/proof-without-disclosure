@@ -3,7 +3,7 @@
 Every file prooflab writes carries the same envelope:
     format: "prooflab", version: 1, type: <what kind of object>, note: ...
 The website's verifiers accept these files, and website-generated files
-verify here — two independent implementations of one spec
+verify here: two independent implementations of one spec
 (docs/format-spec.md), pinned together by vectors/test-vectors.json.
 """
 

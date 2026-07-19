@@ -1,10 +1,10 @@
-/** Chapter 3 — the Merkle tree.
+/** Chapter 3: the Merkle tree.
  *
  * Five student records are hashed into leaves (RFC 6962 domain separation,
- * merkle.ts), paired upward until one root vouches for the whole set — odd
+ * merkle.ts), paired upward until one root vouches for the whole set; odd
  * nodes promote unchanged, so the right spine is the same hash climbing.
  * Every node is tinted by the first byte of its REAL digest: the data
- * literally colors the tree. Then a proof for student_2 lights up — the
+ * literally colors the tree. Then a proof for student_2 lights up: the
  * parent chain glows accent, the three siblings handed to the verifier glow
  * warn, and every leaf the proof never mentions goes dark. That darkness is
  * the point: membership shown, nothing else disclosed.
@@ -46,7 +46,7 @@ const LEAF_SPREAD = 1.35;
 const ROLE_PATH = 1; // leaf 1 and its parent chain up to the root
 const ROLE_SIBLING = 2; // the hashes the proof actually ships
 
-// module-scope temps — useFrame must not allocate
+// module-scope temps: useFrame must not allocate
 const tmpObject = new THREE.Object3D();
 const tmpColor = new THREE.Color();
 const tmpVec = new THREE.Vector3();
@@ -345,7 +345,7 @@ export default function MerkleChapter() {
     }
     mm.instanceMatrix.needsUpdate = true;
 
-    // the root announcing itself — a basic-material halo rather than a
+    // the root announcing itself: a basic-material halo rather than a
     // pointLight: mounting/unmounting a scene light changes the light count
     // and forces every standard material in the canvas to recompile its
     // shader, a visible hitch right as the chapter scrolls in
@@ -354,7 +354,7 @@ export default function MerkleChapter() {
     rootHaloMaterial.current.opacity = rootBeat * fade * 0.35;
   });
 
-  // empty group until the tree is hashed — keeps the chapterFrame gate valid
+  // empty group until the tree is hashed; keeps the chapterFrame gate valid
   return (
     <group ref={group}>
       {layout && (

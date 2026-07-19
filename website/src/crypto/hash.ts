@@ -1,4 +1,4 @@
-/** SHA-256 via the browser's Web Crypto API — the vetted primitive this
+/** SHA-256 via the browser's Web Crypto API: the vetted primitive this
  * project builds on but never reimplements. */
 
 import { nextTask } from "./async";
@@ -24,7 +24,7 @@ export async function sha256FileHex(file: Blob): Promise<string> {
 /**
  * Birthday-paradox playground: hash random inputs until two collide on the
  * first `bits` bits of SHA-256. Returns the colliding pair and attempt count.
- * Expected attempts ≈ 1.2533 * sqrt(2^bits) — the birthday bound.
+ * Expected attempts ≈ 1.2533 * sqrt(2^bits), the birthday bound.
  */
 export async function findTruncatedCollision(
   bits: number,

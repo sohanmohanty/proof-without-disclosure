@@ -1,6 +1,6 @@
 # prooflab
 
-Educational cryptography toolkit — the command-line half of
+Educational cryptography toolkit, the command-line half of
 [Proof Without Disclosure](../README.md). Generate and verify hashes,
 commitments, Merkle membership proofs, ECDSA signatures, and Schnorr
 zero-knowledge proofs on your own machine. Files it writes verify in the
@@ -11,7 +11,7 @@ project website's drag-and-drop verifier, and vice versa.
 ## Install
 
 ```bash
-pip install -e .                 # core — zero dependencies (stdlib only)
+pip install -e .                 # core: zero dependencies (stdlib only)
 pip install -e ".[signatures]"   # + ECDSA file signatures ('cryptography')
 pip install -e ".[dev]"          # + pytest and signature test dependencies
 ```

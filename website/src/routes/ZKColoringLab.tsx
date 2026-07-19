@@ -31,13 +31,13 @@ const MODES: Record<Mode, { label: string; graph: typeof PETERSEN; coloring: num
     label: "Cheating prover",
     graph: PETERSEN,
     coloring: PETERSEN_CHEAT_COLORING,
-    blurb: "The prover's coloring has exactly one bad edge hidden among 15. Each round they survive with probability 14/15 — catch them.",
+    blurb: "The prover's coloring has exactly one bad edge hidden among 15. Each round they survive with probability 14/15. Catch them.",
   },
   impossible: {
     label: "Impossible claim (K₄)",
     graph: K4,
     coloring: K4.coloring,
-    blurb: "K₄ connects all four nodes to each other — no 3-coloring can ever work. The prover's claim is a lie by definition.",
+    blurb: "K₄ connects all four nodes to each other, so no 3-coloring can ever work. The prover's claim is a lie by definition.",
   },
 };
 
@@ -137,7 +137,7 @@ export default function ZKColoringLab() {
     <LabPage
       kicker="Module 05"
       title="Zero-Knowledge Proofs"
-      question="How can you prove you know a solution — without showing it?"
+      question="How can you prove you know a solution, without showing it?"
       intro={
         <p>
           The prover claims: <em>"I can color this graph with 3 colors so that
@@ -186,7 +186,7 @@ export default function ZKColoringLab() {
             </div>
             {round && (
               <p className="footnote">
-                {committedCount} commitments locked (one per node) — now click
+                {committedCount} commitments locked (one per node). Now click
                 any edge in the graph to challenge it.
               </p>
             )}
@@ -204,13 +204,13 @@ export default function ZKColoringLab() {
                 <strong>
                   {lastVerdict
                     ? `✓ Edge (${challenged[0]}, ${challenged[1]}) opened: colors differ`
-                    : `✗ Edge (${challenged[0]}, ${challenged[1]}) opened: SAME color — prover caught!`}
+                    : `✗ Edge (${challenged[0]}, ${challenged[1]}) opened: SAME color. Prover caught!`}
                 </strong>
                 <ul>
                   <li>
                     Both commitment openings checked out
                     {lastVerdict
-                      ? ", and the endpoints show different colors. This edge is fine — but you learned nothing about the rest."
+                      ? ", and the endpoints show different colors. This edge is fine, but you learned nothing about the rest."
                       : ", so the prover couldn't hide it: this edge is monochrome. The claim is false."}
                   </li>
                 </ul>
@@ -236,14 +236,14 @@ export default function ZKColoringLab() {
             />
             <p className="footnote">
               Covered nodes hold committed colors. Only a challenged edge's two
-              endpoints are ever opened — and labels are re-shuffled before the
+              endpoints are ever opened, and labels are re-shuffled before the
               next round, so reveals never add up to the real coloring.
             </p>
           </div>
         </div>
       </Section>
 
-      <Section title="Confidence — soundness you can measure">
+      <Section title="Confidence: soundness you can measure">
         <ConfidenceMeter edgeCount={graph.edges.length} acceptedRounds={accepted} />
         <div className="stat-row">
           <div className="stat">Rounds total <b>{total}</b></div>
@@ -264,7 +264,7 @@ export default function ZKColoringLab() {
               <li>
                 The bad edge was ({knownBadEdge[0]}, {knownBadEdge[1]}). With{" "}
                 {graph.edges.length} edges, a cheater expects to survive about{" "}
-                {graph.edges.length} rounds — soundness is a statistical noose
+                {graph.edges.length} rounds; soundness is a statistical noose
                 that tightens every round.
               </li>
             </ul>
@@ -276,7 +276,7 @@ export default function ZKColoringLab() {
             <ul>
               <li>
                 You are {((1 - (1 - 1 / graph.edges.length) ** accepted) * 100).toFixed(2)}%
-                sure the prover knows a valid coloring — and you could not
+                sure the prover knows a valid coloring, and you could not
                 reconstruct even three nodes of it. That is zero-knowledge.
               </li>
             </ul>
@@ -284,7 +284,7 @@ export default function ZKColoringLab() {
         )}
       </Section>
 
-      <Section title="Why the shuffle matters — and what this proves">
+      <Section title="Why the shuffle matters, and what this proves">
         <CodeBlock
           label="one round"
           code={`
@@ -298,7 +298,7 @@ verifier: openings valid AND colors differ  ->  accept round`}
           Without the shuffle, reveals would accumulate: challenge (0,1) then
           (1,2) and you would learn three nodes of the true coloring. With a
           fresh relabeling each round, "node 3 is teal" this round and "node 3
-          is rose" the next are both meaningless — each round leaks exactly one
+          is rose" the next are both meaningless; each round leaks exactly one
           bit: <em>this edge is properly colored under some naming</em>.
         </p>
         <Guarantees
@@ -309,15 +309,15 @@ verifier: openings valid AND colors differ  ->  accept round`}
             "The verifier's random choices are what make it trustworthy",
           ]}
           doesnt={[
-            "One round proves almost nothing (14/15 survival) — repetition is the proof",
+            "One round proves almost nothing (14/15 survival); repetition is the proof",
             "This toy protocol needs interaction (module 06 removes that)",
-            "Not a production ZK system — real ones prove statements non-interactively",
+            "Not a production ZK system: real ones prove statements non-interactively",
           ]}
           world={[
             "ZK proofs let you prove you're over 18 without showing your birthdate",
             "Private credentials: prove membership without identifying yourself",
             "zk-rollups verify thousands of transactions with one succinct proof",
-            "Graph 3-coloring is NP-complete — so this game generalizes to ALL of NP",
+            "Graph 3-coloring is NP-complete, so this game generalizes to ALL of NP",
           ]}
         />
         <MathAside>
@@ -331,8 +331,8 @@ verifier: openings valid AND colors differ  ->  accept round`}
             endpoints differently at random, commit garbage everywhere else.
             The distribution matches real transcripts, so transcripts carry no
             knowledge. <strong>Generality.</strong> 3-coloring is NP-complete
-            (Karp, 1972), so any NP statement — "I know a password", "this
-            transaction is valid" — can be encoded as a graph and proven this
+            (Karp, 1972), so any NP statement ("I know a password", "this
+            transaction is valid") can be encoded as a graph and proven this
             way (Goldreich–Micali–Wigderson, 1986). Toy protocol, universal
             idea.
           </p>

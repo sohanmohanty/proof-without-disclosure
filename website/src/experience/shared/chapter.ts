@@ -11,7 +11,7 @@ export interface ChapterFrame {
 }
 
 /** Call once at the top of a chapter's useFrame. Everything a scene does
- * must be a function of (local, elapsed time) — chapters are unmounted and
+ * must be a function of (local, elapsed time): chapters are unmounted and
  * remounted as the visitor scrolls, so no state may depend on history. */
 export function chapterFrame(id: ChapterId): ChapterFrame {
   const local = localProgress(journey.offsetVh, id);

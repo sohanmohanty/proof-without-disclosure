@@ -1,5 +1,5 @@
 /** Hash commitments: commit = SHA-256(salt_hex + ":" + secret).
- * Byte-identical to the Python implementation — see docs/format-spec.md. */
+ * Byte-identical to the Python implementation; see docs/format-spec.md. */
 
 import { sha256Hex } from "./hash";
 import { bytesToHex, randomBytes } from "./hex";

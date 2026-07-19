@@ -1,6 +1,6 @@
 /** DOM-side content of the journey: the hero header (title + live hash
  * input), one caption card per chapter, and the outro. Every number shown
- * here is real — computed on mount by the same crypto modules the labs
+ * here is real: computed on mount by the same crypto modules the labs
  * use. The 3D scenes illustrate; these captions carry the actual data.
  */
 
@@ -112,13 +112,13 @@ export function HeroHeader() {
       </p>
       <div className="j-hash-input">
         <label className="visually-hidden" htmlFor="hero-hash-input">
-          Type anything — the field behind is its SHA-256 fingerprint
+          Type anything. The field behind is its SHA-256 fingerprint
         </label>
         <input
           id="hero-hash-input"
           type="text"
           maxLength={120}
-          placeholder="type anything — the field behind you is its fingerprint"
+          placeholder="type anything; the field behind you is its fingerprint"
           value={typed}
           onChange={(e) => onChange(e.target.value)}
           onFocus={() => setRevealed(true)}
@@ -134,10 +134,10 @@ export function HeroHeader() {
         <code>{digest || "…"}</code>
       </p>
       <div className="privacy-chip">
-        ● Everything runs in your browser — nothing is uploaded, ever.
+        ● Everything runs in your browser. Nothing is uploaded, ever.
       </div>
       <p className="j-cue" aria-hidden="true">
-        scroll — six ways to prove without revealing ↓
+        scroll: six ways to prove without revealing ↓
       </p>
     </header>
   );
@@ -197,7 +197,7 @@ function CommitReadout() {
       </div>
       <div>
         <dt>reveals</dt>
-        <dd>nothing — until you open it</dd>
+        <dd>nothing, until you open it</dd>
       </div>
     </dl>
   );
@@ -226,7 +226,7 @@ function MerkleReadout() {
       <div>
         <dt>proof for student_2</dt>
         <dd>
-          <b>{data.proofLen} hashes</b> — the other names stay dark
+          <b>{data.proofLen} hashes</b>; the other names stay dark
         </dd>
       </div>
     </dl>
@@ -257,7 +257,7 @@ function SignatureReadout() {
       <div>
         <dt>signature r‖s</dt>
         <dd>
-          <code>{short(data.signature)}</code> — 64 bytes, fresh every visit
+          <code>{short(data.signature)}</code> (64 bytes, fresh every visit)
         </dd>
       </div>
     </dl>
@@ -320,7 +320,7 @@ function SchnorrReadout() {
         </dd>
       </div>
       <div>
-        <dt title='SHA-256 of the domain-separated transcript ("prooflab-schnorr-v1|toy-23|…|hello"), reduced mod q — byte-exact rules in docs/format-spec.md'>
+        <dt title='SHA-256 of the domain-separated transcript ("prooflab-schnorr-v1|toy-23|…|hello"), reduced mod q; byte-exact rules in docs/format-spec.md'>
           c = H(transcript) mod 11
         </dt>
         <dd>
@@ -330,7 +330,7 @@ function SchnorrReadout() {
       <div>
         <dt>s = (5 + c·7) mod 11</dt>
         <dd>
-          <b>{data.s}</b> — verifies: 4ˢ ≡ R·yᶜ
+          <b>{data.s}</b>, which verifies: 4ˢ ≡ R·yᶜ
         </dd>
       </div>
     </dl>
@@ -361,7 +361,7 @@ const CAPTIONS: Partial<Record<ChapterId, CaptionSpec>> = {
     body: (
       <>
         Any amount of data goes in; exactly 256 bits come out, and there is
-        no way back. Change one letter and half the lattice flips — the
+        no way back. Change one letter and half the lattice flips: the
         avalanche effect. That asymmetry is the raw material every proof on
         this site is built from.
       </>
@@ -379,7 +379,7 @@ const CAPTIONS: Partial<Record<ChapterId, CaptionSpec>> = {
         Publish the hash of a secret today and you are locked in without
         having given anything away: the sealed sphere hides what's inside
         (<em>hiding</em>) and won't accept a substitute (<em>binding</em>).
-        Open it whenever you like — everyone can check you never changed
+        Open it whenever you like; everyone can check you never changed
         your mind.
       </>
     ),
@@ -394,8 +394,8 @@ const CAPTIONS: Partial<Record<ChapterId, CaptionSpec>> = {
     body: (
       <>
         Hash pairs of hashes upward and a whole dataset folds into one
-        32-byte root. Proving one leaf belongs takes only the glowing path —
-        log₂(n) hashes — while every other leaf stays dark. Certificate
+        32-byte root. Proving one leaf belongs takes only the glowing path,
+        log₂(n) hashes, while every other leaf stays dark. Certificate
         Transparency runs on exactly this tree.
       </>
     ),
@@ -411,7 +411,7 @@ const CAPTIONS: Partial<Record<ChapterId, CaptionSpec>> = {
       <>
         An elliptic-curve keypair splits the power to <em>prove</em> from
         the power to <em>check</em>. Signing stamps a document with 64
-        bytes that anyone can verify came from your key — and no one can
+        bytes that anyone can verify came from your key and that no one can
         forge, because the chord-and-tangent dance only runs one way.
       </>
     ),
@@ -443,7 +443,7 @@ const CAPTIONS: Partial<Record<ChapterId, CaptionSpec>> = {
       <>
         Commit to a random point, take a challenge, answer with a single
         number: g<sup>s</sup> ≡ R·y<sup>c</sup> settles it without exposing
-        x. Then replace the challenger with a hash function — Fiat–Shamir —
+        x. Then replace the challenger with a hash function (Fiat–Shamir)
         and the whole dialogue collapses into a signature. The verifier was
         a hash all along.
       </>
@@ -476,7 +476,7 @@ export function CaptionFor({ id }: { id: ChapterId }) {
 export function OutroContent() {
   return (
     <div className="j-outro">
-      <h2>Now try to cheat.</h2>
+      <h2>Now try to forge a proof.</h2>
       <p>
         Every lesson here ends the same way: watch a forged proof fail. Six
         interactive labs, a drag-and-drop verifier, and a Python CLI that

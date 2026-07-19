@@ -6,8 +6,8 @@ signing uses a vetted library. Nothing here rolls its own curve arithmetic.
 
 Interop formats (shared with the website's Web Crypto implementation, see
 docs/format-spec.md):
-  public key — 65-byte uncompressed SEC1 point (0x04 || X || Y), hex;
-  signature  — 64-byte IEEE P1363 raw form (r || s, 32 bytes each), hex.
+  public key: 65-byte uncompressed SEC1 point (0x04 || X || Y), hex;
+  signature:  64-byte IEEE P1363 raw form (r || s, 32 bytes each), hex.
 Web Crypto emits exactly these; `cryptography` uses DER, so we convert.
 """
 

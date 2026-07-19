@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "prooflab"
 version = "0.1.0"
-description = "Educational cryptography toolkit: hashes, commitments, Merkle proofs, Schnorr proofs, and signatures — proof without disclosure."
+description = "Educational cryptography toolkit: hashes, commitments, Merkle proofs, Schnorr proofs, and signatures. Proof without disclosure."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }

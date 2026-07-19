@@ -57,7 +57,7 @@ export default function SignatureLab() {
       why: ok
         ? `The current text is exactly what ${label} signed.`
         : edited && label === "Alice"
-          ? "The message was edited after signing — even one character breaks the signature."
+          ? "The message was edited after signing; even one character breaks the signature."
           : `This signature was not produced by ${label}'s private key.`,
     });
   }
@@ -66,18 +66,18 @@ export default function SignatureLab() {
     <LabPage
       kicker="Module 04"
       title="Digital Signatures"
-      question="How can a message prove who sent it — and that nobody changed it?"
+      question="How can a message prove who sent it, and that nobody changed it?"
       intro={
         <p>
           A signature key comes in two halves. The <strong>private key</strong>{" "}
           signs; the matching <strong>public key</strong> verifies. Anyone can
-          check, only the key-holder can produce — that asymmetry is what
+          check, only the key-holder can produce. That asymmetry is what
           hand-written signatures always wished they had. (Real ECDSA P-256 via
           your browser's Web Crypto API, not a simulation.)
         </p>
       }
     >
-      <Section title="Step 1 — Two identities">
+      <Section title="Step 1: Two identities">
         <div className="controls">
           <button className="primary" onClick={() => void generate()}>
             {alice ? "Regenerate key pairs" : "Generate key pairs"}
@@ -89,7 +89,7 @@ export default function SignatureLab() {
               <HexDigest label="Alice's public key (share freely)" value={alice.publicHex} />
               <p className="footnote">
                 Alice's private key stays inside this tab. Signing proves she
-                holds it — without showing it.
+                holds it, without showing it.
               </p>
             </div>
             <div>
@@ -103,7 +103,7 @@ export default function SignatureLab() {
         )}
       </Section>
 
-      <Section title="Step 2 — Sign, then try to break it">
+      <Section title="Step 2: Sign, then try to break it">
         <label htmlFor="msg">Message</label>
         <textarea
           id="msg"
@@ -163,8 +163,8 @@ export default function SignatureLab() {
 
       <Section title="Verify a CLI signature">
         <p>
-          Sign a file on your machine —{" "}
-          <code>prooflab sign message.txt --key private.pem</code> — then drop
+          Sign a file on your machine with{" "}
+          <code>prooflab sign message.txt --key private.pem</code>, then drop
           both <code>signature.json</code> and the original file here. The
           formats are identical: an uncompressed P-256 public key and a raw
           r∥s signature.
@@ -181,7 +181,7 @@ export default function SignatureLab() {
             "The message is bound to one specific key pair",
           ]}
           doesnt={[
-            "Doesn't hide the message — signatures are not encryption",
+            "Doesn't hide the message: signatures are not encryption",
             "Doesn't prove the key belongs to a PERSON (that's what certificates add)",
             "Doesn't prove when it was signed",
             "'Non-repudiation' holds only if the private key never leaks",
@@ -201,13 +201,13 @@ sign:    signature = Sign(private, message)
 verify:  Verify(public, message, signature) -> true | false
 
 # vetted implementations only (Web Crypto here, 'cryptography' in the
-# CLI) — signing algorithms are where hand-rolled code gets people hurt`}
+# CLI); signing algorithms are where hand-rolled code gets people hurt`}
         />
         <MathAside>
           <p>
             ECDSA verification checks an algebraic relation between the
             message hash, the signature pair (r, s), and the public-key point
-            on the P-256 curve — forging it without the private key requires
+            on the P-256 curve; forging it without the private key requires
             solving the elliptic-curve discrete-log problem. The next two
             modules make that phrase concrete: module 06 builds a signature
             from discrete logs right in front of you, and shows that a

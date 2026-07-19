@@ -1,7 +1,7 @@
 import { Link, useSearchParams } from "react-router-dom";
 import HomeContent from "../components/HomeContent";
 
-/** The classic landing page — also the fallback for visitors who can't run
+/** The classic landing page, also the fallback for visitors who can't run
  * (or don't want) the 3D journey: no WebGL, prefers-reduced-motion, or an
  * explicit ?classic=1. */
 export default function Home() {
@@ -18,7 +18,7 @@ export default function Home() {
           What can you prove without revealing more than necessary?
         </p>
         <div className="privacy-chip">
-          ● Everything runs in your browser — nothing is uploaded, ever.
+          ● Everything runs in your browser; nothing is uploaded, ever.
         </div>
         {params.has("classic") && (
           <p className="back-to-3d">

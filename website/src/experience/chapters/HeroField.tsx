@@ -1,14 +1,14 @@
-/** Chapter 0 — the hero bit-field.
+/** Chapter 0: the hero bit-field.
  *
  * A lattice of tiles, one per bit, expanded from a real SHA-256 digest of
  * whatever the visitor types (field.ts). When the digest changes, tiles
- * flip — a half-turn around X — in a ripple radiating from the center: the
+ * flip (a half-turn around X) in a ripple radiating from the center: the
  * avalanche effect, watchable.
  *
  * This is the exemplar chapter: every scene follows the same shape.
  *   1. chapterFrame(id) at the top of useFrame; bail when off.
  *   2. All choreography is a pure function of `local` (and elapsed time
- *      for ambient motion) — chapters get unmounted/remounted freely.
+ *      for ambient motion); chapters get unmounted/remounted freely.
  *   3. Instanced meshes, module-scope temp objects, zero per-frame allocs.
  *   4. Colors are copied from the palette every frame so theme flips
  *      propagate mid-animation.
@@ -26,7 +26,7 @@ import { usePalette } from "../shared/palette";
 const SPACING = 0.24;
 const FLIP_SECONDS = 0.28;
 
-// module-scope temps — useFrame must not allocate
+// module-scope temps: useFrame must not allocate
 const tmpObject = new THREE.Object3D();
 const tmpColor = new THREE.Color();
 const offColor = new THREE.Color();

@@ -4,7 +4,7 @@ The prover claims to know a 3-coloring of a public graph. One round:
 
   1. prover secretly shuffles the three color labels (a random permutation);
   2. prover commits to every node's shuffled color (hash commitments,
-     reusing prooflab.commitments — the module-2 primitive powering the
+     reusing prooflab.commitments, the module-2 primitive powering the
      module-6 protocol);
   3. verifier picks one edge at random;
   4. prover opens the two endpoint commitments, nothing else;
@@ -18,7 +18,7 @@ Zero-knowledge: each round exposes only "two random-looking different labels
 on one edge". Because labels are re-shuffled every round, observations never
 accumulate into the actual coloring.
 
-Everything here is an educational simulation run inside one process — real
+Everything here is an educational simulation run inside one process; real
 deployments use non-interactive proof systems, not this protocol.
 """
 

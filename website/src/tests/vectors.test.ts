@@ -1,5 +1,5 @@
-/** The interop pin: every vector in vectors/test-vectors.json — generated
- * by the Python implementation — must verify identically here. */
+/** The interop pin: every vector in vectors/test-vectors.json (generated
+ * by the Python implementation) must verify identically here. */
 
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";

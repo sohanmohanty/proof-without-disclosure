@@ -28,7 +28,7 @@ are informational and never verified. Document types:
 - `file_hash.digest` = `hex(H(file bytes))`.
 - `file_hash.file_name` is informational; verification uses the bytes supplied
   by the user, not the recorded name.
-- Text hashing (everywhere below) hashes `utf8(text)` — no BOM, no
+- Text hashing (everywhere below) hashes `utf8(text)`: no BOM, no
   normalization, no trailing newline.
 
 ## 3. Commitments
@@ -70,7 +70,7 @@ Tree construction over a non-empty ordered list:
 4. The root is the single node of the top level, `hex`-encoded.
 
 Proofs (`merkle_proof`): `item` (the raw string), `leaf_hash`, `root`, and
-`path` — an ordered array of steps `{ "position": "left"|"right", "hash": <hex> }`,
+`path`, an ordered array of steps `{ "position": "left"|"right", "hash": <hex> }`,
 bottom-up. `position` is the **sibling's** side. A promoted node contributes
 no step at that level. Verification:
 
@@ -100,17 +100,17 @@ message bytes).
 
 ## 6. Schnorr proofs
 
-Groups — safe prime `p = 2q + 1`, generator `g = 4` (order exactly `q` for
+Groups: safe prime `p = 2q + 1`, generator `g = 4` (order exactly `q` for
 every safe prime > 5):
 
 | `group` | p | notes |
 |---|---|---|
-| `toy-23` | 23 | q = 11 — deliberately breakable classroom group |
+| `toy-23` | 23 | q = 11; deliberately breakable classroom group |
 | `modp-2048` | RFC 3526 group 14 prime | q = (p−1)/2, 2048-bit |
 
 Integer encoding: fixed-width big-endian, zero-padded to the byte length of
 `p` (1 byte for `toy-23`, 256 bytes for `modp-2048`), lowercase hex. All of
-`public_key` (y), `commitment` (R), `response` (s) use this width — including
+`public_key` (y), `commitment` (R), `response` (s) use this width, including
 `s`, even though `s < q`.
 
 Key pair: private `x ∈ [1, q−1]`, public `y = g^x mod p`.

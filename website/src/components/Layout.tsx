@@ -92,7 +92,7 @@ export default function Layout() {
             not be used to secure sensitive real-world systems.
           </p>
           <p>
-            Everything on this site runs in your browser — no server, no
+            Everything on this site runs in your browser: no server, no
             uploads, no analytics. Companion CLI: <code>prooflab</code>.
             Implementations, format spec, and tests are open on{" "}
             <a href={REPO_URL} target="_blank" rel="noopener noreferrer">

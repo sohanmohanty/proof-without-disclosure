@@ -1,6 +1,6 @@
 /** Mutable per-frame state shared between the scrolling DOM and the R3F
  * scenes. Scenes read it inside useFrame; the DOM writes it from event
- * listeners. Nothing here triggers React renders — that is the point:
+ * listeners. Nothing here triggers React renders; that is the point:
  * scroll choreography runs at frame rate without going through React.
  */
 
@@ -22,7 +22,7 @@ export interface HeroFieldState {
 export interface JourneyState {
   /** Raw scroll offset into the journey, in vh units (set by the DOM). */
   targetVh: number;
-  /** Smoothed offset — what the scenes should read. */
+  /** Smoothed offset: what the scenes should read. */
   offsetVh: number;
   /** Pointer position in [-1, 1], viewport-normalized. */
   pointerX: number;
@@ -41,7 +41,7 @@ export const journey: JourneyState = {
 };
 
 /** Exponential smoothing with meaningful units: after `halfLife` seconds,
- * half of the remaining distance is covered — framerate-independent. */
+ * half of the remaining distance is covered, framerate-independent. */
 export function smoothTowards(
   current: number,
   target: number,
@@ -65,7 +65,7 @@ export function bindJourney(wrapper: HTMLElement): () => void {
     // the caption sections are sized in CSS vh, so derive the same unit
     // from the wrapper's rendered height (= TOTAL_VH vh) instead of
     // window.innerHeight, which drifts from CSS vh on mobile browsers with
-    // dynamic toolbars — the drift would desync scenes from captions
+    // dynamic toolbars; the drift would desync scenes from captions
     const vhPx = rect.height / TOTAL_VH;
     journey.targetVh = vhPx > 0 ? Math.max(0, -rect.top / vhPx) : 0;
   };

@@ -1,5 +1,5 @@
 /** Schnorr identification and Fiat-Shamir proofs over safe-prime groups.
- * Mirrors prooflab/schnorr.py exactly — see that file and the SchnorrLab
+ * Mirrors prooflab/schnorr.py exactly; see that file and the SchnorrLab
  * page for the protocol story. All arithmetic is native BigInt.
  */
 
@@ -94,7 +94,7 @@ export function keygen(group: Group, x?: bigint): KeyPair {
   return { group, x: priv, y: modPow(group.g, priv, group.p) };
 }
 
-/** c = SHA-256(domain | group | y | R | message) mod q — same preimage
+/** c = SHA-256(domain | group | y | R | message) mod q; same preimage
  * layout as Python, so challenges match across implementations. */
 export async function fiatShamirChallenge(
   group: Group,
@@ -161,7 +161,7 @@ export function check(
 }
 
 /** Cheating prover: guess the challenge c*, pick s at random, and derive
- * R = g^s * y^(-c*). Passes iff the real challenge equals the guess — odds
+ * R = g^s * y^(-c*). Passes iff the real challenge equals the guess: odds
  * exactly 1/q. Watchable in the toy group (q = 11), hopeless at 2048 bits. */
 export function forgeCommitment(group: Group, y: bigint, guessedC: bigint) {
   const s = randBelow(group.q);
@@ -170,7 +170,7 @@ export function forgeCommitment(group: Group, y: bigint, guessedC: bigint) {
   return { s, R };
 }
 
-/** Recover x from y by trying every exponent — the attack that group size
+/** Recover x from y by trying every exponent: the attack that group size
  * exists to defeat. Instant when q = 11; unthinkable when q ≈ 2^2046. */
 export function bruteForceDlog(
   group: Group,
