@@ -51,23 +51,37 @@ export default function HomeContent() {
   return (
     // tabIndex -1: focus target for the journey's "skip the tour" control
     <div id="modules" tabIndex={-1}>
-      <div className="module-grid">
+      <ul className="module-index">
         {MODULES.map((m) => (
-          <Link key={m.to} to={m.to} className="module-card">
-            <span className="num">{m.num}</span>
-            <h3>{m.title}</h3>
-            <p>{m.blurb}</p>
-          </Link>
+          <li key={m.to}>
+            <Link to={m.to} className="module-row">
+              <span className="num">{m.num}</span>
+              <span className="module-row-text">
+                <h3>{m.title}</h3>
+                <p>{m.blurb}</p>
+              </span>
+              <span className="arrow" aria-hidden="true">
+                →
+              </span>
+            </Link>
+          </li>
         ))}
-        <Link to="/toolkit" className="module-card">
-          <span className="num">CLI</span>
-          <h3>Local Toolkit</h3>
-          <p>
-            Download <code>prooflab</code> and generate the same proofs on
-            your own machine, then verify them here.
-          </p>
-        </Link>
-      </div>
+        <li>
+          <Link to="/toolkit" className="module-row">
+            <span className="num">CLI</span>
+            <span className="module-row-text">
+              <h3>Local Toolkit</h3>
+              <p>
+                Download <code>prooflab</code> and generate the same proofs
+                on your own machine, then verify them here.
+              </p>
+            </span>
+            <span className="arrow" aria-hidden="true">
+              →
+            </span>
+          </Link>
+        </li>
+      </ul>
 
       <section className="section">
         <h2>One idea, six angles</h2>

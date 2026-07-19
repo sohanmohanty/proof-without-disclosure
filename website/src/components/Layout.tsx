@@ -86,12 +86,6 @@ export default function Layout() {
       <footer className="site-footer">
         <div className="site-footer-inner">
           <p>
-            <strong>Educational project.</strong> Proof Without Disclosure
-            demonstrates cryptographic concepts through interactive simulations
-            and local tools. It is not audited, not production-grade, and must
-            not be used to secure sensitive real-world systems.
-          </p>
-          <p>
             Everything on this site runs in your browser: no server, no
             uploads, no analytics. Companion CLI: <code>prooflab</code>.
             Implementations, format spec, and tests are open on{" "}

@@ -172,15 +172,15 @@ main { max-width: 1200px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
   margin-top: 0.4rem;
 }
 
+/* sections are flat editorial blocks separated by thin rules, not raised
+   cards; inset elements (code blocks, hex output, banners) supply their
+   own containment */
 .section {
-  background: var(--bg-raised);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 1.4rem 1.5rem;
-  margin-bottom: 1.5rem;
+  border-top: 1px solid var(--line);
+  padding: 1.9rem 0 2.1rem;
+  margin: 0;
 }
-.section > h2 { margin-bottom: 0.75rem; }
+.section > h2 { margin-bottom: 0.85rem; }
 
 .split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 1.5rem; }
 @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
@@ -264,18 +264,22 @@ button:disabled { opacity: 0.45; cursor: not-allowed; }
 
 /* ---------- guarantees ---------- */
 
-.guarantees { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; }
-.guarantee-card { border: 1px solid var(--line); border-radius: 8px; padding: 0.85rem 1rem; background: var(--bg); }
+.guarantees { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.75rem; }
+/* flat columns: the colored top rule carries each column's identity */
+.guarantee-card { border-top: 2px solid var(--line); padding: 0.7rem 0 0; }
 .guarantee-card h4 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+.guarantee-card.does { border-top-color: var(--good); }
+.guarantee-card.doesnt { border-top-color: var(--bad); }
+.guarantee-card.world { border-top-color: var(--accent); }
 .guarantee-card.does h4 { color: var(--good); }
 .guarantee-card.doesnt h4 { color: var(--bad); }
 .guarantee-card.world h4 { color: var(--accent); }
 .guarantee-card ul { margin: 0; padding-left: 1.1rem; font-size: 0.9rem; color: var(--ink-soft); }
 .guarantee-card li { margin: 0.3rem 0; }
 
-.math-aside { border: 1px dashed var(--line); border-radius: 8px; margin-top: 1rem; background: var(--bg); }
-.math-aside summary { cursor: pointer; font-weight: 600; color: var(--accent); padding: 0.7rem 1rem; font-size: 0.92rem; }
-.math-aside .math-body { padding: 0 1rem 0.9rem; color: var(--ink-soft); font-size: 0.92rem; }
+.math-aside { border-left: 3px solid var(--accent); margin-top: 1rem; }
+.math-aside summary { cursor: pointer; font-weight: 600; color: var(--accent); padding: 0.45rem 1rem; font-size: 0.92rem; }
+.math-aside .math-body { padding: 0 1rem 0.6rem; color: var(--ink-soft); font-size: 0.92rem; }
 .math-aside .math-body code { font-size: 0.85em; }
 
 /* ---------- home ---------- */
@@ -305,22 +309,53 @@ button:disabled { opacity: 0.45; cursor: not-allowed; }
   padding: 0.35rem 0.9rem;
 }
 
-.module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1rem; margin: 2rem 0; }
-.module-card {
-  display: block;
+/* module index: a course-syllabus listing, not cards. Rows are separated
+   by thin rules; the mono chapter number and the arrow pick up the accent
+   on hover so the row reads as one link. */
+.module-index {
+  list-style: none;
+  margin: 2.25rem 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.module-index li { border-bottom: 1px solid var(--line); }
+.module-row {
+  display: grid;
+  grid-template-columns: 3.9rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 1.05rem 0.5rem;
   text-decoration: none;
   color: var(--ink);
-  background: var(--bg-raised);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 1.1rem 1.2rem;
-  box-shadow: var(--shadow);
-  transition: transform 0.12s ease, border-color 0.12s ease;
+  transition: background 0.12s ease;
 }
-.module-card:hover { transform: translateY(-2px); border-color: var(--accent); }
-.module-card .num { color: var(--accent); font-family: var(--mono); font-size: 0.8rem; }
-.module-card h3 { margin: 0.2rem 0 0.3rem; }
-.module-card p { color: var(--ink-soft); font-size: 0.92rem; margin: 0; }
+.module-row .num {
+  font-family: var(--mono);
+  font-size: 1.4rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+  transition: color 0.12s ease;
+}
+.module-row h3 { margin: 0 0 0.15rem; font-size: 1.05rem; }
+.module-row p { color: var(--ink-soft); font-size: 0.92rem; margin: 0; }
+.module-row .arrow {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  color: var(--ink-faint);
+  transition: transform 0.12s ease, color 0.12s ease;
+}
+.module-row:hover,
+.module-row:focus-visible { background: var(--accent-soft); }
+.module-row:hover .num,
+.module-row:hover .arrow,
+.module-row:focus-visible .num,
+.module-row:focus-visible .arrow { color: var(--accent); }
+.module-row:hover .arrow,
+.module-row:focus-visible .arrow { transform: translateX(4px); }
+@media (max-width: 700px) {
+  .module-row { grid-template-columns: 2.5rem minmax(0, 1fr) auto; gap: 0.75rem; }
+  .module-row .num { font-size: 1rem; }
+}
 
 .philosophy {
   max-width: 720px;
