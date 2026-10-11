@@ -4,7 +4,7 @@
 
 Created by **Sohan Mohanty**.
 
-**Live site:** <https://proof-without-disclosure.vercel.app/>
+**Live site:** <https://proofwithoutdisclosure.com/>
 
 > What can mathematics let us prove without revealing more than necessary?
 
