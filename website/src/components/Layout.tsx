@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { applyPageMetaToDocument } from "../seo";
 import { REPO_URL } from "../site";
 
 const LINKS = [
@@ -23,6 +24,9 @@ export default function Layout() {
     document.documentElement.dataset.theme = dark ? "dark" : "";
     localStorage.setItem("pwd-theme", dark ? "dark" : "light");
   }, [dark]);
+
+  // title, description, and canonical follow client-side navigation
+  useEffect(() => applyPageMetaToDocument(pathname), [pathname]);
 
   // every route must open at its top: the 3D journey page is ~13,000px tall
   // and the browser keeps scroll across route swaps, so without this a

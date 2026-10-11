@@ -232,7 +232,7 @@ Two implementations with zero shared code are kept byte-compatible by:
    accepts CLI files, and CLI `verify` commands accept website downloads,
    so every user interaction doubles as an interop test.
 
-Python: 61 tests. TypeScript: 50 tests. CI runs both plus a type-check and
+Python: 61 tests. TypeScript: 62 tests. CI runs both plus a type-check and
 production build.
 
 ---

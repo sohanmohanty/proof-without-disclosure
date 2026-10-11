@@ -18,14 +18,7 @@ export default function Landing() {
   // and hero fallback flash for however long the 3D chunk takes to arrive
   const [intro, setIntro] = useState(() => !introAlreadyPlayed());
 
-  // check both query forms: HashRouter only sees "#/?classic=1", but the
-  // naturally typed "site/?classic=1" puts the query before the hash
-  if (
-    wantsClassic(location.search) ||
-    wantsClassic(window.location.search) ||
-    !caps.webgl ||
-    caps.reducedMotion
-  ) {
+  if (wantsClassic(location.search) || !caps.webgl || caps.reducedMotion) {
     return <Home />;
   }
   return (

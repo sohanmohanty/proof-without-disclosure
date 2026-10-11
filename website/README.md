@@ -50,10 +50,25 @@ npm run preview    # serve the production bundle locally
 
 ## Deploy
 
-`vite.config.ts` uses `base: "./"` and the app uses hash routing, so
-`dist/` works from **any** static host or subdirectory with zero
-configuration: GitHub Pages, Netlify, Vercel, or a plain file server.
-Build and upload `dist/`.
+Hosted on Vercel at <https://proofwithoutdisclosure.com> with the project
+root set to `website/`. Pages use clean URLs (`/merkle`, not `/#/merkle`):
+
+- `src/seo.ts` lists every public page with its title and description. It
+  drives the router, the head tags, and the build output, so a new page is
+  added there (and `App.tsx` won't compile until it has a component).
+- The build writes one HTML file per page (`dist/merkle.html`, ...) with
+  that page's title, description, and canonical URL already in the head,
+  plus `sitemap.xml` and a `noindex` `404.html`.
+- `vercel.json` turns on `cleanUrls`, so `/merkle` serves `merkle.html`
+  (and refreshes or direct visits work), and `trailingSlash: false`
+  redirects `/merkle/` to `/merkle`. Unknown paths get `404.html` with a
+  real 404 status.
+- Old hash links (`/#/merkle`, `/#/?classic=1`) are rewritten to the clean
+  URL in the browser on load (`src/legacyHash.ts`).
+
+Any static host that serves `name.html` for `/name` and `404.html` for
+missing paths works the same way; the site must be served from the domain
+root.
 
 ## Structure
 
@@ -68,6 +83,7 @@ src/
 |                 # + outro), all driven by src/crypto/ output
 |-- components/   # Layout, LabPage, Dropzone, MerkleTreeSVG, GraphSVG, ...
 |-- routes/       # Landing (3D/classic switch), Home + 6 labs + Toolkit + About
+|-- seo.ts        # public pages: titles, descriptions, canonical, sitemap
 `-- tests/        # vitest suites incl. vectors.test.ts (interop pin) and
                   # experience.test.ts (timeline/bit-field math)
 ```

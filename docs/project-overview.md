@@ -55,8 +55,9 @@ and is meant to be read.
 The built project has two independent implementations of the same proof
 formats:
 
-- `website/`: React + TypeScript, client-side cryptography, hash routing, and
-  a static Vite build that can be hosted from any subdirectory.
+- `website/`: React + TypeScript, client-side cryptography, clean URLs, and
+  a static Vite build with a pre-built HTML page and sitemap entry for every
+  lab.
 - `prooflab/`: installable Python CLI with commands for hashing,
   commitments, Merkle trees, signatures, Schnorr proofs, and graph-coloring
   simulations.
@@ -66,7 +67,7 @@ formats:
 - `.github/workflows/ci.yml`: CI for Python tests, website tests,
   type-checking, and production build.
 
-Current verification coverage: 61 Python tests and 50 TypeScript tests.
+Current verification coverage: 61 Python tests and 62 TypeScript tests.
 
 ## Success criteria
 

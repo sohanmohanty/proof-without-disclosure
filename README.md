@@ -40,7 +40,7 @@ Every module ends the same way: *what this guarantees, what it does not guarante
 cd website
 npm install
 npm run dev        # http://localhost:5173
-npm test           # 50 vitest tests, including shared-vector interop
+npm test           # 62 vitest tests, including shared-vector interop
 npm run build      # static bundle in dist/, deployable to any static host
 ```
 
@@ -66,7 +66,7 @@ prooflab zk-color demo --rounds 30 --cheat
 cd prooflab
 python -m pytest      # 61 tests
 cd ../website
-npx vitest run        # 50 tests
+npx vitest run        # 62 tests
 ```
 
 Both suites verify [`vectors/test-vectors.json`](vectors/test-vectors.json). From the project root, regenerate it only after a deliberate format change with `python prooflab/scripts/generate_vectors.py`.
