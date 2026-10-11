@@ -66,7 +66,7 @@ formats:
 - `.github/workflows/ci.yml`: CI for Python tests, website tests,
   type-checking, and production build.
 
-Current verification coverage: 61 Python tests and 38 TypeScript tests.
+Current verification coverage: 61 Python tests and 50 TypeScript tests.
 
 ## Success criteria
 

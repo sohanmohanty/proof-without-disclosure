@@ -4,7 +4,7 @@ from pathlib import Path
 
 from prooflab import hashing
 
-# Published SHA-256 test vectors: if these pass, our usage of hashlib is
+# Published SHA-256 test vectors: if these pass, the hashlib usage here is
 # byte-for-byte what every other SHA-256 on earth computes.
 NIST_ABC = "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
 EMPTY = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"

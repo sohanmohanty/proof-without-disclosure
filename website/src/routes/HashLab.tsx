@@ -159,7 +159,7 @@ export default function HashLab() {
         <p>
           A hash is only useful if nobody can find two inputs with the same
           fingerprint. Full SHA-256 has 2<sup>256</sup> possible outputs. But
-          what if we only kept the first few bits? Search for a collision on a
+          what if you only kept the first few bits? Search for a collision on a
           truncated hash and watch the <em>birthday paradox</em> at work.
         </p>
         <div className="controls">

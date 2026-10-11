@@ -26,7 +26,7 @@ describe("commitments", () => {
     );
     expect(got).toHaveLength(64);
     // cross-checked against vectors/test-vectors.json in vectors.test.ts;
-    // here we only pin determinism
+    // this test only pins determinism
     expect(got).toBe(
       await computeCommitment("hello", "00112233445566778899aabbccddeeff"),
     );

@@ -53,7 +53,7 @@ def test_domain_separation_leaf_vs_node():
 
 
 def test_forged_internal_node_leaf_rejected():
-    """The concrete RFC 6962 attack we prevent: present the concatenation of
+    """The concrete RFC 6962 attack this design prevents: present the concatenation of
     two internal hashes as if it were a leaf. With domain separation the
     forged proof must fail."""
     tree = merkle.build_tree(ITEMS4)

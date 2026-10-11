@@ -31,8 +31,8 @@ sentence, taught separately.
 ## 1. Hash functions (SHA-256)
 
 **What it does.** Maps arbitrary bytes to a fixed 256-bit digest,
-deterministically. We use vetted implementations only (Web Crypto in the
-browser, `hashlib` in Python); this project never reimplements the
+deterministically. Only vetted implementations are used (Web Crypto in
+the browser, `hashlib` in Python); this project never reimplements the
 primitive.
 
 **Properties relied on.**
@@ -232,7 +232,7 @@ Two implementations with zero shared code are kept byte-compatible by:
    accepts CLI files, and CLI `verify` commands accept website downloads,
    so every user interaction doubles as an interop test.
 
-Python: 61 tests. TypeScript: 38 tests. CI runs both plus a type-check and
+Python: 61 tests. TypeScript: 50 tests. CI runs both plus a type-check and
 production build.
 
 ---
